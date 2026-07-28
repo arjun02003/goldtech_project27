@@ -286,7 +286,7 @@ img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
 /*# sourceURL=woocommerce-inline-inline-css */
 </style>
 <link rel="stylesheet" id="wp-live-chat-support-css" href="https://goldtechgraphicsinfo.com/wp-content/plugins/wp-live-chat-support/public/css/wplc-plugin-public.css?ver=10.0.17" media="all">
-<link rel="stylesheet" id="site-styles.css-css" href="https://goldtechgraphicsinfo.com/wp-content/plugins/omnisend/styles/site-styles.css?1785179439&amp;ver=1.7.9" media="all">
+<link rel="stylesheet" id="site-styles.css-css" href="https://goldtechgraphicsinfo.com/wp-content/plugins/omnisend/styles/site-styles.css?1785226899&amp;ver=1.7.9" media="all">
 <link rel="stylesheet" id="elementor-post-3049-css" href="https://goldtechgraphicsinfo.com/wp-content/uploads/elementor/css/post-3049.css?ver=1784326285" media="all">
 <link rel="stylesheet" id="elementor-pro-css" href="https://goldtechgraphicsinfo.com/wp-content/plugins/pro-elements/assets/css/frontend.min.css?ver=3.23.3" media="all">
 <link rel="stylesheet" id="font-awesome-5-all-css" href="https://goldtechgraphicsinfo.com/wp-content/plugins/elementor/assets/lib/font-awesome/css/all.min.css?ver=3.35.0" media="all">
@@ -379,10 +379,6 @@ figcaption,
 
 
 
-
-
-
-
 <style id="goldtech-custom-fixes">
 /* Reset header overrides introduced by clashing Colorjet styles */
 header {
@@ -400,31 +396,6 @@ ul.sub-menu {
 }
 ul.sub-menu li a {
   white-space: nowrap !important;
-}
-
-/* Style tables to have solid purple backgrounds and white text */
-table {
-  border-collapse: collapse !important;
-  border: 2px solid #8c819c !important;
-  width: 100% !important;
-}
-table th {
-  background-color: #7b6f8d !important;
-  color: #ffffff !important;
-  padding: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-table td {
-  background-color: #8c819c !important;
-  color: #ffffff !important;
-  padding: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-table td span, 
-table th span, 
-table td a, 
-table th a {
-  color: #ffffff !important;
 }
 
 /* Fix for Bootstrap carousel controls turning purple on hover in Astra */
@@ -463,19 +434,88 @@ ul.sub-menu a.menu-link[aria-current="page"],
   opacity: 1 !important;
 }
 
-/* Fix for table text visibility (dark text on light/white table background) */
-table td,
-table th,
-table td span, 
-table th span, 
-table td a, 
-table th a {
-  color: #333333 !important;
+/* Nested sub-menu positioning (level 2, 3 fly-out to the right) */
+ul.sub-menu {
+  position: absolute !important;
+  z-index: 99999 !important;
+  display: none;
+}
+ul.sub-menu ul.sub-menu {
+  top: 0 !important;
+  left: 100% !important;
+}
+
+/* Ensure menu items are clickable with proper pointer */
+ul.sub-menu li a {
+  display: block !important;
+  padding: 8px 16px !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Keep parent menu visible while hovering on child */
+.menu-item-has-children:hover {
+  position: relative !important;
+}
+
+/* Branches table: EXACT original styling */
+.elementor-element-dc31f39 {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+.elementor-element-dc31f39 table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  border: 2px solid #8c819c !important;
+}
+.elementor-element-dc31f39 table th,
+.elementor-element-dc31f39 table td {
+  background-color: #8c819c !important;
+  color: #ffffff !important;
+  padding: 12px 15px !important;
+  border: 1px solid rgba(255,255,255,0.4) !important;
+  font-size: 14px !important;
+}
+.elementor-element-dc31f39 table th {
+  text-align: center !important;
+  font-weight: bold !important;
+  background-color: #7b6f8d !important; /* slightly darker header */
 }
 </style>
 </head>
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="wp-singular page-template-default page page-id-11628 wp-custom-logo wp-embed-responsive wp-theme-astra theme-astra woocommerce-no-js ast-desktop ast-page-builder-template ast-no-sidebar astra-4.12.1 ast-single-post ast-woocommerce-cart-menu ast-replace-site-logo-transparent ast-inherit-site-logo-transparent ast-hfb-header ast-full-width-primary-header elementor-default elementor-kit-3049 elementor-page elementor-page-11628">
+<!-- GOLDTECH TOP BAR -->
+<div class="goldtech-top-bar" style="background: #1a1a1a; color: #cccccc; font-size: 13px; font-family: Arial, sans-serif; padding: 8px 0; border-bottom: 1px solid #333333; position: relative; z-index: 9999;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+      <a href="mailto:info@goldtechgraphicsinfo.com" style="color: #cccccc; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 4L12 13L2 4"></path></svg>
+        info@goldtechgraphicsinfo.com
+      </a>
+      <span style="color: #555555;">|</span>
+      <a href="tel:+919810897344" style="color: #cccccc; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg>
+        +91-98108 97344
+      </a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="https://www.facebook.com/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+      </a>
+      <a href="https://www.instagram.com/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="5"></circle><circle cx="17.5" cy="6.5" r="1.5" fill="#cccccc"></circle></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="https://www.youtube.com/@goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"></path><polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="#1a1a1a"></polygon></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 
 <a class="skip-link screen-reader-text" href="#content">
 		Skip to content</a>
@@ -1166,7 +1206,7 @@ table th a {
 </ul>
 </li>
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8458"><a href="/contact/" class="elementor-item menu-link">Contact</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
+<li class="menu-item"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
 					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
 			<svg aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open e-font-icon-svg e-eicon-menu-bar" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M104 333H896C929 333 958 304 958 271S929 208 896 208H104C71 208 42 237 42 271S71 333 104 333ZM104 583H896C929 583 958 554 958 521S929 458 896 458H104C71 458 42 487 42 521S71 583 104 583ZM104 833H896C929 833 958 804 958 771S929 708 896 708H104C71 708 42 737 42 771S71 833 104 833Z"></path></svg><svg aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close e-font-icon-svg e-eicon-close" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M742 167L500 408 258 167C246 154 233 150 217 150 196 150 179 158 167 167 154 179 150 196 150 212 150 229 154 242 171 254L408 500 167 742C138 771 138 800 167 829 196 858 225 858 254 829L496 587 738 829C750 842 767 846 783 846 800 846 817 842 829 829 842 817 846 804 846 783 846 767 842 750 829 737L588 500 833 258C863 229 863 200 833 171 804 137 775 137 742 167Z"></path></svg>			<span class="elementor-screen-only">Menu</span>
 		</div>
@@ -1842,7 +1882,7 @@ table th a {
 </ul>
 </li>
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8458"><a href="/contact/" class="elementor-item menu-link" tabindex="-1">Contact</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
+<li class="menu-item"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
 						</div>
 				</div>
 				</div>
@@ -3204,9 +3244,9 @@ wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
 </script>
 <script id="presto-components-js-extra">
 var prestoComponents = {"url":"https://goldtechgraphicsinfo.com/wp-content/plugins/presto-player/dist/components/web-components/web-components.esm.js?ver=1770100610"};
-var prestoPlayer = {"plugin_url":"https://goldtechgraphicsinfo.com/wp-content/plugins/presto-player/","logged_in":"","root":"https://goldtechgraphicsinfo.com/wp-json/","nonce":"62e68d6f99","ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","isAdmin":"","isSetup":{"bunny":false},"proVersion":"","isPremium":"","wpVersionString":"wp/v2/","prestoVersionString":"presto-player/v1/","debug":"","debug_navigator":"","i18n":{"skip":"Skip","rewatch":"Rewatch","emailPlaceholder":"Email address","emailDefaultHeadline":"Enter your email to play this episode.","chapters":"Chapters","show_chapters":"Show Chapters","hide_chapters":"Hide Chapters","restart":"Restart","rewind":"Rewind {seektime}s","play":"Play","pause":"Pause","fastForward":"Forward {seektime}s","seek":"Seek","seekLabel":"{currentTime} of {duration}","played":"Played","buffered":"Buffered","currentTime":"Current time","duration":"Duration","volume":"Volume","mute":"Mute","unmute":"Unmute","enableCaptions":"Enable captions","disableCaptions":"Disable captions","download":"Download","enterFullscreen":"Enter fullscreen","exitFullscreen":"Exit fullscreen","frameTitle":"Player for {title}","captions":"Captions","settings":"Settings","pip":"PIP","menuBack":"Go back to previous menu","speed":"Speed","normal":"Normal","quality":"Quality","loop":"Loop","start":"Start","end":"End","all":"All","reset":"Reset","disabled":"Disabled","enabled":"Enabled","advertisement":"Ad","qualityBadge":{"2160":"4K","1440":"HD","1080":"HD","720":"HD","576":"SD","480":"SD"},"auto":"AUTO","upNext":"Up Next","startOver":"Start Over"}};
+var prestoPlayer = {"plugin_url":"https://goldtechgraphicsinfo.com/wp-content/plugins/presto-player/","logged_in":"","root":"https://goldtechgraphicsinfo.com/wp-json/","nonce":"5b15187572","ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","isAdmin":"","isSetup":{"bunny":false},"proVersion":"","isPremium":"","wpVersionString":"wp/v2/","prestoVersionString":"presto-player/v1/","debug":"","debug_navigator":"","i18n":{"skip":"Skip","rewatch":"Rewatch","emailPlaceholder":"Email address","emailDefaultHeadline":"Enter your email to play this episode.","chapters":"Chapters","show_chapters":"Show Chapters","hide_chapters":"Hide Chapters","restart":"Restart","rewind":"Rewind {seektime}s","play":"Play","pause":"Pause","fastForward":"Forward {seektime}s","seek":"Seek","seekLabel":"{currentTime} of {duration}","played":"Played","buffered":"Buffered","currentTime":"Current time","duration":"Duration","volume":"Volume","mute":"Mute","unmute":"Unmute","enableCaptions":"Enable captions","disableCaptions":"Disable captions","download":"Download","enterFullscreen":"Enter fullscreen","exitFullscreen":"Exit fullscreen","frameTitle":"Player for {title}","captions":"Captions","settings":"Settings","pip":"PIP","menuBack":"Go back to previous menu","speed":"Speed","normal":"Normal","quality":"Quality","loop":"Loop","start":"Start","end":"End","all":"All","reset":"Reset","disabled":"Disabled","enabled":"Enabled","advertisement":"Ad","qualityBadge":{"2160":"4K","1440":"HD","1080":"HD","720":"HD","576":"SD","480":"SD"},"auto":"AUTO","upNext":"Up Next","startOver":"Start Over"}};
 var prestoComponents = {"url":"https://goldtechgraphicsinfo.com/wp-content/plugins/presto-player/dist/components/web-components/web-components.esm.js?ver=1770100610"};
-var prestoPlayer = {"plugin_url":"https://goldtechgraphicsinfo.com/wp-content/plugins/presto-player/","logged_in":"","root":"https://goldtechgraphicsinfo.com/wp-json/","nonce":"62e68d6f99","ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","isAdmin":"","isSetup":{"bunny":false},"proVersion":"","isPremium":"","wpVersionString":"wp/v2/","prestoVersionString":"presto-player/v1/","debug":"","debug_navigator":"","i18n":{"skip":"Skip","rewatch":"Rewatch","emailPlaceholder":"Email address","emailDefaultHeadline":"Enter your email to play this episode.","chapters":"Chapters","show_chapters":"Show Chapters","hide_chapters":"Hide Chapters","restart":"Restart","rewind":"Rewind {seektime}s","play":"Play","pause":"Pause","fastForward":"Forward {seektime}s","seek":"Seek","seekLabel":"{currentTime} of {duration}","played":"Played","buffered":"Buffered","currentTime":"Current time","duration":"Duration","volume":"Volume","mute":"Mute","unmute":"Unmute","enableCaptions":"Enable captions","disableCaptions":"Disable captions","download":"Download","enterFullscreen":"Enter fullscreen","exitFullscreen":"Exit fullscreen","frameTitle":"Player for {title}","captions":"Captions","settings":"Settings","pip":"PIP","menuBack":"Go back to previous menu","speed":"Speed","normal":"Normal","quality":"Quality","loop":"Loop","start":"Start","end":"End","all":"All","reset":"Reset","disabled":"Disabled","enabled":"Enabled","advertisement":"Ad","qualityBadge":{"2160":"4K","1440":"HD","1080":"HD","720":"HD","576":"SD","480":"SD"},"auto":"AUTO","upNext":"Up Next","startOver":"Start Over"}};
+var prestoPlayer = {"plugin_url":"https://goldtechgraphicsinfo.com/wp-content/plugins/presto-player/","logged_in":"","root":"https://goldtechgraphicsinfo.com/wp-json/","nonce":"5b15187572","ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","isAdmin":"","isSetup":{"bunny":false},"proVersion":"","isPremium":"","wpVersionString":"wp/v2/","prestoVersionString":"presto-player/v1/","debug":"","debug_navigator":"","i18n":{"skip":"Skip","rewatch":"Rewatch","emailPlaceholder":"Email address","emailDefaultHeadline":"Enter your email to play this episode.","chapters":"Chapters","show_chapters":"Show Chapters","hide_chapters":"Hide Chapters","restart":"Restart","rewind":"Rewind {seektime}s","play":"Play","pause":"Pause","fastForward":"Forward {seektime}s","seek":"Seek","seekLabel":"{currentTime} of {duration}","played":"Played","buffered":"Buffered","currentTime":"Current time","duration":"Duration","volume":"Volume","mute":"Mute","unmute":"Unmute","enableCaptions":"Enable captions","disableCaptions":"Disable captions","download":"Download","enterFullscreen":"Enter fullscreen","exitFullscreen":"Exit fullscreen","frameTitle":"Player for {title}","captions":"Captions","settings":"Settings","pip":"PIP","menuBack":"Go back to previous menu","speed":"Speed","normal":"Normal","quality":"Quality","loop":"Loop","start":"Start","end":"End","all":"All","reset":"Reset","disabled":"Disabled","enabled":"Enabled","advertisement":"Ad","qualityBadge":{"2160":"4K","1440":"HD","1080":"HD","720":"HD","576":"SD","480":"SD"},"auto":"AUTO","upNext":"Up Next","startOver":"Start Over"}};
 //# sourceURL=presto-components-js-extra
 </script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/presto-player/src/player/player-static.js?ver=1770100610" type="module" defer=""></script><script src="https://goldtechgraphicsinfo.com/wp-content/plugins/contact-form-7/includes/swv/js/index.js?ver=6.1.5" id="swv-js"></script>
@@ -3251,13 +3291,13 @@ var EAELImageMaskingConfig = {"svg_dir_url":"https://goldtechgraphicsinfo.com/wp
 //# sourceURL=elementor-frontend-js-extra
 </script>
 <script id="elementor-frontend-js-before">
-var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"3.35.0","is_static":false,"experimentalFeatures":{"e_font_icon_svg":true,"additional_custom_breakpoints":true,"container":true,"theme_builder_v2":true,"nested-elements":true,"home_screen":true,"global_classes_should_enforce_capabilities":true,"e_variables":true,"cloud-library":true,"e_opt_in_v4_page":true,"e_components":true,"e_interactions":true,"e_editor_one":true,"import-export-customization":true,"display-conditions":true,"form-submissions":true,"taxonomy-filter":true,"search":true},"urls":{"assets":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/goldtechgraphicsinfo.com\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"7834411f6c"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","woocommerce_notices_elements":[]},"post":{"id":11628,"title":"Starjet%2060%C3%9790%20I3200%20U1%20-%20Industrial%20Printers%20Manufacturer%20%7C%20Goldtech%20Graphics%20Pvt.%20Ltd.","excerpt":"","featuredImage":false}};
+var elementorFrontendConfig = {"environmentMode":{"edit":false,"wpPreview":false,"isScriptDebug":false},"i18n":{"shareOnFacebook":"Share on Facebook","shareOnTwitter":"Share on Twitter","pinIt":"Pin it","download":"Download","downloadImage":"Download image","fullscreen":"Fullscreen","zoom":"Zoom","share":"Share","playVideo":"Play Video","previous":"Previous","next":"Next","close":"Close","a11yCarouselPrevSlideMessage":"Previous slide","a11yCarouselNextSlideMessage":"Next slide","a11yCarouselFirstSlideMessage":"This is the first slide","a11yCarouselLastSlideMessage":"This is the last slide","a11yCarouselPaginationBulletMessage":"Go to slide"},"is_rtl":false,"breakpoints":{"xs":0,"sm":480,"md":768,"lg":1025,"xl":1440,"xxl":1600},"responsive":{"breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}},"hasCustomBreakpoints":false},"version":"3.35.0","is_static":false,"experimentalFeatures":{"e_font_icon_svg":true,"additional_custom_breakpoints":true,"container":true,"theme_builder_v2":true,"nested-elements":true,"home_screen":true,"global_classes_should_enforce_capabilities":true,"e_variables":true,"cloud-library":true,"e_opt_in_v4_page":true,"e_components":true,"e_interactions":true,"e_editor_one":true,"import-export-customization":true,"display-conditions":true,"form-submissions":true,"taxonomy-filter":true,"search":true},"urls":{"assets":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/plugins\/elementor\/assets\/","ajaxurl":"https:\/\/goldtechgraphicsinfo.com\/wp-admin\/admin-ajax.php","uploadUrl":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/uploads"},"nonces":{"floatingButtonsClickTracking":"7cadafb23b"},"swiperClass":"swiper","settings":{"page":[],"editorPreferences":[]},"kit":{"active_breakpoints":["viewport_mobile","viewport_tablet"],"global_image_lightbox":"yes","lightbox_enable_counter":"yes","lightbox_enable_fullscreen":"yes","lightbox_enable_zoom":"yes","lightbox_enable_share":"yes","lightbox_title_src":"title","lightbox_description_src":"description","woocommerce_notices_elements":[]},"post":{"id":11628,"title":"Starjet%2060%C3%9790%20I3200%20U1%20-%20Industrial%20Printers%20Manufacturer%20%7C%20Goldtech%20Graphics%20Pvt.%20Ltd.","excerpt":"","featuredImage":false}};
 //# sourceURL=elementor-frontend-js-before
 </script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/elementor/assets/js/frontend.min.js?ver=3.35.0" id="elementor-frontend-js"></script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/elementor/assets/lib/swiper/v8/swiper.min.js?ver=8.4.5" id="swiper-js"></script>
 <script id="eael-general-js-extra">
-var localize = {"ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","nonce":"bbc9171e6e","i18n":{"added":"Added ","compare":"Compare","loading":"Loading..."},"eael_translate_text":{"required_text":"is a required field","invalid_text":"Invalid","billing_text":"Billing","shipping_text":"Shipping","fg_mfp_counter_text":"of"},"page_permalink":"https://goldtechgraphicsinfo.com/starjet-60x90-i3200-u1/","cart_redirectition":"no","cart_page_url":"https://goldtechgraphicsinfo.com/cart/","el_breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}};
+var localize = {"ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","nonce":"76d24eebde","i18n":{"added":"Added ","compare":"Compare","loading":"Loading..."},"eael_translate_text":{"required_text":"is a required field","invalid_text":"Invalid","billing_text":"Billing","shipping_text":"Shipping","fg_mfp_counter_text":"of"},"page_permalink":"https://goldtechgraphicsinfo.com/starjet-60x90-i3200-u1/","cart_redirectition":"no","cart_page_url":"https://goldtechgraphicsinfo.com/cart/","el_breakpoints":{"mobile":{"label":"Mobile Portrait","value":767,"default_value":767,"direction":"max","is_enabled":true},"mobile_extra":{"label":"Mobile Landscape","value":880,"default_value":880,"direction":"max","is_enabled":false},"tablet":{"label":"Tablet Portrait","value":1024,"default_value":1024,"direction":"max","is_enabled":true},"tablet_extra":{"label":"Tablet Landscape","value":1200,"default_value":1200,"direction":"max","is_enabled":false},"laptop":{"label":"Laptop","value":1366,"default_value":1366,"direction":"max","is_enabled":false},"widescreen":{"label":"Widescreen","value":2400,"default_value":2400,"direction":"min","is_enabled":false}}};
 //# sourceURL=eael-general-js-extra
 </script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/essential-addons-for-elementor-lite/assets/front-end/js/view/general.min.js?ver=6.5.11" id="eael-general-js"></script>
@@ -3269,14 +3309,14 @@ var wc_cart_fragments_params = {"ajax_url":"/wp-admin/admin-ajax.php","wc_ajax_u
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/woocommerce/assets/js/frontend/cart-fragments.min.js?ver=10.4.4" id="wc-cart-fragments-js" defer="" data-wp-strategy="defer"></script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/pro-elements/assets/js/webpack-pro.runtime.min.js?ver=3.23.3" id="elementor-pro-webpack-runtime-js"></script>
 <script id="elementor-pro-frontend-js-before">
-var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/goldtechgraphicsinfo.com\/wp-admin\/admin-ajax.php","nonce":"fec656c0dd","urls":{"assets":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/plugins\/pro-elements\/assets\/","rest":"https:\/\/goldtechgraphicsinfo.com\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},"woocommerce":{"menu_cart":{"cart_page_url":"https:\/\/goldtechgraphicsinfo.com\/cart\/","checkout_page_url":"https:\/\/goldtechgraphicsinfo.com\/checkout\/","fragments_nonce":"06a9a01200"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/plugins\/pro-elements\/modules\/lottie\/assets\/animations\/default.json"}};
+var ElementorProFrontendConfig = {"ajaxurl":"https:\/\/goldtechgraphicsinfo.com\/wp-admin\/admin-ajax.php","nonce":"e8912e0117","urls":{"assets":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/plugins\/pro-elements\/assets\/","rest":"https:\/\/goldtechgraphicsinfo.com\/wp-json\/"},"shareButtonsNetworks":{"facebook":{"title":"Facebook","has_counter":true},"twitter":{"title":"Twitter"},"linkedin":{"title":"LinkedIn","has_counter":true},"pinterest":{"title":"Pinterest","has_counter":true},"reddit":{"title":"Reddit","has_counter":true},"vk":{"title":"VK","has_counter":true},"odnoklassniki":{"title":"OK","has_counter":true},"tumblr":{"title":"Tumblr"},"digg":{"title":"Digg"},"skype":{"title":"Skype"},"stumbleupon":{"title":"StumbleUpon","has_counter":true},"mix":{"title":"Mix"},"telegram":{"title":"Telegram"},"pocket":{"title":"Pocket","has_counter":true},"xing":{"title":"XING","has_counter":true},"whatsapp":{"title":"WhatsApp"},"email":{"title":"Email"},"print":{"title":"Print"},"x-twitter":{"title":"X"},"threads":{"title":"Threads"}},"woocommerce":{"menu_cart":{"cart_page_url":"https:\/\/goldtechgraphicsinfo.com\/cart\/","checkout_page_url":"https:\/\/goldtechgraphicsinfo.com\/checkout\/","fragments_nonce":"5d351459d2"}},"facebook_sdk":{"lang":"en_US","app_id":""},"lottie":{"defaultAnimationUrl":"https:\/\/goldtechgraphicsinfo.com\/wp-content\/plugins\/pro-elements\/modules\/lottie\/assets\/animations\/default.json"}};
 //# sourceURL=elementor-pro-frontend-js-before
 </script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/pro-elements/assets/js/frontend.min.js?ver=3.23.3" id="elementor-pro-frontend-js"></script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/pro-elements/assets/js/elements-handlers.min.js?ver=3.23.3" id="pro-elements-handlers-js"></script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/elementskit-lite/widgets/init/assets/js/animate-circle.min.js?ver=3.7.8" id="animate-circle-js"></script>
 <script id="elementskit-elementor-js-extra">
-var ekit_config = {"ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","nonce":"b17fc3e4c0"};
+var ekit_config = {"ajaxurl":"https://goldtechgraphicsinfo.com/wp-admin/admin-ajax.php","nonce":"78e5c38ab0"};
 //# sourceURL=elementskit-elementor-js-extra
 </script>
 <script src="https://goldtechgraphicsinfo.com/wp-content/plugins/elementskit-lite/widgets/init/assets/js/elementor.js?ver=3.7.8" id="elementskit-elementor-js"></script>
@@ -3315,4 +3355,4 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 
 
 
-</body></html><!-- Page cached by LiteSpeed Cache 7.7 on 2026-07-27 19:10:39 -->
+</body></html><!-- Page cached by LiteSpeed Cache 7.7 on 2026-07-28 08:21:39 -->

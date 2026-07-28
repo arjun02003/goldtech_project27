@@ -394,6 +394,14 @@ figcaption,
 
 
 
+
+
+
+
+
+
+
+
 <style id="goldtech-custom-fixes">
 /* Reset header overrides introduced by clashing Colorjet styles */
 header {
@@ -411,31 +419,6 @@ ul.sub-menu {
 }
 ul.sub-menu li a {
   white-space: nowrap !important;
-}
-
-/* Style tables to have solid purple backgrounds and white text */
-table {
-  border-collapse: collapse !important;
-  border: 2px solid #8c819c !important;
-  width: 100% !important;
-}
-table th {
-  background-color: #7b6f8d !important;
-  color: #ffffff !important;
-  padding: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-table td {
-  background-color: #8c819c !important;
-  color: #ffffff !important;
-  padding: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-table td span, 
-table th span, 
-table td a, 
-table th a {
-  color: #ffffff !important;
 }
 
 /* Fix for Bootstrap carousel controls turning purple on hover in Astra */
@@ -474,19 +457,93 @@ ul.sub-menu a.menu-link[aria-current="page"],
   opacity: 1 !important;
 }
 
-/* Fix for table text visibility (dark text on light/white table background) */
-table td,
-table th,
-table td span, 
-table th span, 
-table td a, 
-table th a {
-  color: #333333 !important;
+/* Nested sub-menu positioning (level 2, 3 fly-out to the right) */
+ul.sub-menu {
+  position: absolute !important;
+  z-index: 99999 !important;
+  display: none;
+}
+ul.sub-menu ul.sub-menu {
+  top: 0 !important;
+  left: 100% !important;
+}
+
+/* Ensure menu items are clickable with proper pointer */
+ul.sub-menu li a {
+  display: block !important;
+  padding: 8px 16px !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Keep parent menu visible while hovering on child */
+.menu-item-has-children:hover {
+  position: relative !important;
+}
+
+/* Branches table: EXACT original styling */
+.elementor-element-dc31f39 {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+.elementor-element-dc31f39 table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  border: 2px solid #8c819c !important;
+}
+.elementor-element-dc31f39 table th,
+.elementor-element-dc31f39 table td {
+  background-color: #8c819c !important;
+  color: #ffffff !important;
+  padding: 12px 15px !important;
+  border: 1px solid rgba(255,255,255,0.4) !important;
+  font-size: 14px !important;
+}
+.elementor-element-dc31f39 table th {
+  text-align: center !important;
+  font-weight: bold !important;
+  background-color: #7b6f8d !important; /* slightly darker header */
 }
 </style>
 </head>
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="home wp-singular page-template-default page page-id-8758 page-child parent-pageid-5914 wp-custom-logo wp-embed-responsive wp-theme-astra theme-astra woocommerce-no-js ast-desktop ast-page-builder-template ast-no-sidebar astra-4.12.1 ast-single-post ast-woocommerce-cart-menu ast-replace-site-logo-transparent ast-inherit-site-logo-transparent ast-hfb-header ast-full-width-primary-header elementor-default elementor-kit-3049 elementor-page elementor-page-8758">
+<!-- GOLDTECH TOP BAR -->
+<div class="goldtech-top-bar" style="background: #1a1a1a; color: #cccccc; font-size: 13px; font-family: Arial, sans-serif; padding: 8px 0; border-bottom: 1px solid #333333; position: relative; z-index: 9999;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    
+    <!-- Left Side: Email & Phone -->
+    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+      <a href="mailto:info@goldtechgraphicsinfo.com" style="color: #cccccc; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 4L12 13L2 4"></path></svg>
+        info@goldtechgraphicsinfo.com
+      </a>
+      <span style="color: #555555;">|</span>
+      <a href="tel:+919810897344" style="color: #cccccc; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg>
+        +91-98108 97344
+      </a>
+    </div>
+
+    <!-- Right Side: Social Icons -->
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="https://www.facebook.com/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.3s;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+      </a>
+      <a href="https://www.instagram.com/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.3s;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="5"></circle><circle cx="17.5" cy="6.5" r="1.5" fill="#cccccc"></circle></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.3s;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="https://www.youtube.com/@goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: background 0.3s;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"></path><polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="#1a1a1a"></polygon></svg>
+      </a>
+    </div>
+
+  </div>
+</div>
+
 
 <a class="skip-link screen-reader-text" href="#content">
 		Skip to content</a>
@@ -1936,108 +1993,55 @@ table th a {
         </div>
     </section>
 <!-- ABOUT GOLDTECH SECTION -->
-<section class="about-goldtech-section" style="padding: 70px 20px; background-color: #ffffff; text-align: center; border-bottom: 1px solid #f0f0f0;">
+<section class="about-goldtech-section" style="padding: 60px 20px; background: linear-gradient(180deg, #f8f8f8 0%, #ffffff 100%); text-align: center; border-bottom: 1px solid #eeeeee;">
   <div class="container" style="max-width: 1200px; margin: 0 auto;">
-    <h2 style="font-size: 26px; font-weight: 700; color: #333333; margin-bottom: 8px; text-transform: none; font-family: Arial, sans-serif;">About Goldtech</h2>
-    <div style="width: 40px; height: 3px; background-color: #333333; margin: 0 auto 50px auto;"></div>
+    <h2 style="font-size: 28px; font-weight: 700; color: #333333; margin-bottom: 8px; font-family: 'Georgia', serif;">About Goldtech</h2>
+    <div style="width: 50px; height: 3px; background-color: #333333; margin: 0 auto 50px auto;"></div>
     
-    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 40px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
       
-      <!-- Feature 1: Innovative Technology Leadership -->
-      <div style="flex: 1 1 240px; max-width: 270px; text-align: center;">
-        <div style="position: relative; width: 120px; height: 120px; margin: 0 auto 25px auto; display: flex; align-items: center; justify-content: center;">
-          <svg style="position: absolute; top:0; left:0; width:100%; height:100%;" viewBox="0 0 120 120">
-            <circle cx="60" cy="60" r="56" fill="none" stroke="#e6e6e6" stroke-width="1.5"></circle>
-            <path d="M 60 4 A 56 56 0 0 1 116 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-            <path d="M 60 116 A 56 56 0 0 1 4 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-          </svg>
-          <div style="width: 96px; height: 96px; border-radius: 50%; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; z-index: 2;">
-            <svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="32" r="12" stroke-width="2.5"></circle>
-              <path d="M32 8v12M32 44v12M8 32h12M44 32h12M15 15l8.5 8.5M40.5 40.5L49 49M15 49l8.5-8.5M40.5 23.5L49 15"></path>
-              <circle cx="32" cy="6" r="2.5" fill="#0066b2"></circle>
-              <circle cx="32" cy="58" r="2.5" fill="#0066b2"></circle>
-              <circle cx="6" cy="32" r="2.5" fill="#0066b2"></circle>
-              <circle cx="58" cy="32" r="2.5" fill="#0066b2"></circle>
-              <circle cx="13" cy="13" r="2.5" fill="#0066b2"></circle>
-              <circle cx="51" cy="51" r="2.5" fill="#0066b2"></circle>
-              <circle cx="13" cy="51" r="2.5" fill="#0066b2"></circle>
-              <circle cx="51" cy="13" r="2.5" fill="#0066b2"></circle>
-            </svg>
-          </div>
+      <!-- Feature 1 -->
+      <div style="flex: 1 1 220px; max-width: 260px; text-align: center;">
+        <div style="width: 130px; height: 130px; margin: 0 auto 20px auto;">
+          <img src="https://www.colorjetgroup.com/uploads/why_colorjets/innovative-technology-leadership-1712592286-211.png" alt="Innovative Technology Leadership" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
-        <h3 style="font-size: 17px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.3; font-family: Arial, sans-serif;">Innovative Technology Leadership</h3>
-        <p style="font-size: 13px; color: #666666; line-height: 1.6; margin: 0; font-family: Arial, sans-serif;">Pioneering Print Solutions: Goldtech leads the industry with state-of-the-art printing technology, delivering solutions that redefine the standards in textile and signage printing.</p>
+        <h3 style="font-size: 16px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.4; font-family: Arial, sans-serif;">Innovative Technology Leadership</h3>
+        <p style="font-size: 13px; color: #666666; line-height: 1.7; margin: 0; font-family: Arial, sans-serif;">Pioneering Print Solutions: Goldtech leads the industry with state-of-the-art printing technology, delivering solutions that redefine the standards in textile and signage printing.</p>
       </div>
 
-      <!-- Feature 2: Reliability and Durability Assurance -->
-      <div style="flex: 1 1 240px; max-width: 270px; text-align: center;">
-        <div style="position: relative; width: 120px; height: 120px; margin: 0 auto 25px auto; display: flex; align-items: center; justify-content: center;">
-          <svg style="position: absolute; top:0; left:0; width:100%; height:100%;" viewBox="0 0 120 120">
-            <circle cx="60" cy="60" r="56" fill="none" stroke="#e6e6e6" stroke-width="1.5"></circle>
-            <path d="M 60 4 A 56 56 0 0 1 116 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-            <path d="M 60 116 A 56 56 0 0 1 4 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-          </svg>
-          <div style="width: 96px; height: 96px; border-radius: 50%; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; z-index: 2;">
-            <svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M32 6 L48 12 V26 C48 38 38 48 32 52 C26 48 16 38 16 26 V12 L32 6 Z"></path>
-              <path d="M24 24 l6 6 l10 -10"></path>
-              <path d="M22 34 l6 6 h8 l6 -6"></path>
-            </svg>
-          </div>
+      <!-- Feature 2 -->
+      <div style="flex: 1 1 220px; max-width: 260px; text-align: center;">
+        <div style="width: 130px; height: 130px; margin: 0 auto 20px auto;">
+          <img src="https://www.colorjetgroup.com/uploads/why_colorjets/reliability-and-durability-assurance-1712592286-524.png" alt="Reliability and Durability Assurance" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
-        <h3 style="font-size: 17px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.3; font-family: Arial, sans-serif;">Reliability and Durability Assurance</h3>
-        <p style="font-size: 13px; color: #666666; line-height: 1.6; margin: 0; font-family: Arial, sans-serif;">Built to Last: Goldtech products are renowned for their robust construction, providing reliability that businesses can depend on for consistent, high-quality output.</p>
+        <h3 style="font-size: 16px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.4; font-family: Arial, sans-serif;">Reliability and Durability Assurance</h3>
+        <p style="font-size: 13px; color: #666666; line-height: 1.7; margin: 0; font-family: Arial, sans-serif;">Built to Last: Goldtech products are renowned for their robust construction, providing reliability that businesses can depend on for consistent, high-quality output.</p>
       </div>
 
-      <!-- Feature 3: Flexibility Excelling Excellence -->
-      <div style="flex: 1 1 240px; max-width: 270px; text-align: center;">
-        <div style="position: relative; width: 120px; height: 120px; margin: 0 auto 25px auto; display: flex; align-items: center; justify-content: center;">
-          <svg style="position: absolute; top:0; left:0; width:100%; height:100%;" viewBox="0 0 120 120">
-            <circle cx="60" cy="60" r="56" fill="none" stroke="#e6e6e6" stroke-width="1.5"></circle>
-            <path d="M 60 4 A 56 56 0 0 1 116 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-            <path d="M 60 116 A 56 56 0 0 1 4 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-          </svg>
-          <div style="width: 96px; height: 96px; border-radius: 50%; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; z-index: 2;">
-            <svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="32" r="8"></circle>
-              <path d="M32 20v4M32 40v4M20 32h4M40 32h4M23.5 23.5l2.8 2.8M37.7 37.7l2.8 2.8M23.5 40.5l2.8-2.8M37.7 26.3l2.8-2.8"></path>
-              <path d="M14 32 A 18 18 0 0 1 32 14 L 30 10 M 32 14 L 30 18"></path>
-              <path d="M50 32 A 18 18 0 0 1 32 50 L 34 54 M 32 50 L 34 46"></path>
-            </svg>
-          </div>
+      <!-- Feature 3 -->
+      <div style="flex: 1 1 220px; max-width: 260px; text-align: center;">
+        <div style="width: 130px; height: 130px; margin: 0 auto 20px auto;">
+          <img src="https://www.colorjetgroup.com/uploads/why_colorjets/flexibility-par-excellence-1712592286-185.png" alt="Flexibility Excelling Excellence" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
-        <h3 style="font-size: 17px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.3; font-family: Arial, sans-serif;">Flexibility Excelling Excellence</h3>
-        <p style="font-size: 13px; color: #666666; line-height: 1.6; margin: 0; font-family: Arial, sans-serif;">Array of Offerings: Goldtech's quiver has solutions for every niche. Built to perfection, these digital printers are designed to process even the widest and the tiniest of the materials with utmost ease.</p>
+        <h3 style="font-size: 16px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.4; font-family: Arial, sans-serif;">Flexibility Excelling Excellence</h3>
+        <p style="font-size: 13px; color: #666666; line-height: 1.7; margin: 0; font-family: Arial, sans-serif;">Array of Offerings: Goldtech's quiver has solutions for every niche. Built to perfection, these digital printers are designed to process even the widest and the tiniest of the materials with utmost ease.</p>
       </div>
 
-      <!-- Feature 4: Customer Oriented Approach -->
-      <div style="flex: 1 1 240px; max-width: 270px; text-align: center;">
-        <div style="position: relative; width: 120px; height: 120px; margin: 0 auto 25px auto; display: flex; align-items: center; justify-content: center;">
-          <svg style="position: absolute; top:0; left:0; width:100%; height:100%;" viewBox="0 0 120 120">
-            <circle cx="60" cy="60" r="56" fill="none" stroke="#e6e6e6" stroke-width="1.5"></circle>
-            <path d="M 60 4 A 56 56 0 0 1 116 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-            <path d="M 60 116 A 56 56 0 0 1 4 60" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round"></path>
-          </svg>
-          <div style="width: 96px; height: 96px; border-radius: 50%; background: #ffffff; box-shadow: 0 4px 12px rgba(0,0,0,0.08); display: flex; align-items: center; justify-content: center; z-index: 2;">
-            <svg width="52" height="52" viewBox="0 0 64 64" fill="none" stroke="#0066b2" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="32" cy="18" r="6" fill="#0066b2"></circle>
-              <path d="M20 34 c0-7 5-10 12-10 s12 3 12 10"></path>
-              <circle cx="16" cy="22" r="4.5"></circle>
-              <path d="M7 36 c0-5 4-8 9-8"></path>
-              <circle cx="48" cy="22" r="4.5"></circle>
-              <path d="M57 36 c0-5-4-8-9-8"></path>
-              <polygon points="32,40 34.5,45 40,45.5 36,49.5 37.2,55 32,52 26.8,55 28,49.5 24,45.5 29.5,45" fill="#0066b2" stroke="none"></polygon>
-            </svg>
-          </div>
+      <!-- Feature 4 -->
+      <div style="flex: 1 1 220px; max-width: 260px; text-align: center;">
+        <div style="width: 130px; height: 130px; margin: 0 auto 20px auto;">
+          <img src="https://www.colorjetgroup.com/uploads/why_colorjets/customer-centric-approach-1712592285-854.png" alt="Customer Oriented Approach" style="width: 100%; height: 100%; object-fit: contain;">
         </div>
-        <h3 style="font-size: 17px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.3; font-family: Arial, sans-serif;">Customer Oriented Approach</h3>
-        <p style="font-size: 13px; color: #666666; line-height: 1.6; margin: 0; font-family: Arial, sans-serif;">Satisfaction matters: Goldtech is not just a brand; it's a partner. Our customer-centric approach ensures that we go the extra mile to understand and address the unique challenges of our clients.</p>
+        <h3 style="font-size: 16px; font-weight: 700; color: #333333; margin-bottom: 12px; line-height: 1.4; font-family: Arial, sans-serif;">Customer Oriented Approach</h3>
+        <p style="font-size: 13px; color: #666666; line-height: 1.7; margin: 0; font-family: Arial, sans-serif;">Satisfaction matters: Goldtech is not just a brand; it's a partner. Our customer-centric approach ensures that we go the extra mile to understand and address the unique challenges of our clients.</p>
       </div>
 
     </div>
   </div>
 </section>
+
+<!-- ABOUT GOLDTECH SECTION -->
+
 
 <!-- ABOUT GOLDTECH SECTION -->
 

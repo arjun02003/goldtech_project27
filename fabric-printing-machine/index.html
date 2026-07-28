@@ -379,10 +379,6 @@ figcaption,
 
 
 
-
-
-
-
 <style id="goldtech-custom-fixes">
 /* Reset header overrides introduced by clashing Colorjet styles */
 header {
@@ -400,31 +396,6 @@ ul.sub-menu {
 }
 ul.sub-menu li a {
   white-space: nowrap !important;
-}
-
-/* Style tables to have solid purple backgrounds and white text */
-table {
-  border-collapse: collapse !important;
-  border: 2px solid #8c819c !important;
-  width: 100% !important;
-}
-table th {
-  background-color: #7b6f8d !important;
-  color: #ffffff !important;
-  padding: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-table td {
-  background-color: #8c819c !important;
-  color: #ffffff !important;
-  padding: 12px !important;
-  border: 1px solid rgba(255, 255, 255, 0.2) !important;
-}
-table td span, 
-table th span, 
-table td a, 
-table th a {
-  color: #ffffff !important;
 }
 
 /* Fix for Bootstrap carousel controls turning purple on hover in Astra */
@@ -463,19 +434,88 @@ ul.sub-menu a.menu-link[aria-current="page"],
   opacity: 1 !important;
 }
 
-/* Fix for table text visibility (dark text on light/white table background) */
-table td,
-table th,
-table td span, 
-table th span, 
-table td a, 
-table th a {
-  color: #333333 !important;
+/* Nested sub-menu positioning (level 2, 3 fly-out to the right) */
+ul.sub-menu {
+  position: absolute !important;
+  z-index: 99999 !important;
+  display: none;
+}
+ul.sub-menu ul.sub-menu {
+  top: 0 !important;
+  left: 100% !important;
+}
+
+/* Ensure menu items are clickable with proper pointer */
+ul.sub-menu li a {
+  display: block !important;
+  padding: 8px 16px !important;
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Keep parent menu visible while hovering on child */
+.menu-item-has-children:hover {
+  position: relative !important;
+}
+
+/* Branches table: EXACT original styling */
+.elementor-element-dc31f39 {
+  background-color: transparent !important;
+  padding: 0 !important;
+}
+.elementor-element-dc31f39 table {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  border: 2px solid #8c819c !important;
+}
+.elementor-element-dc31f39 table th,
+.elementor-element-dc31f39 table td {
+  background-color: #8c819c !important;
+  color: #ffffff !important;
+  padding: 12px 15px !important;
+  border: 1px solid rgba(255,255,255,0.4) !important;
+  font-size: 14px !important;
+}
+.elementor-element-dc31f39 table th {
+  text-align: center !important;
+  font-weight: bold !important;
+  background-color: #7b6f8d !important; /* slightly darker header */
 }
 </style>
 </head>
 
 <body itemtype="https://schema.org/WebPage" itemscope="itemscope" class="wp-singular page-template-default page page-id-8814 wp-custom-logo wp-embed-responsive wp-theme-astra theme-astra woocommerce-no-js ast-desktop ast-page-builder-template ast-no-sidebar astra-4.12.1 ast-single-post ast-woocommerce-cart-menu ast-replace-site-logo-transparent ast-inherit-site-logo-transparent ast-hfb-header ast-full-width-primary-header elementor-default elementor-kit-3049 elementor-page elementor-page-8814">
+<!-- GOLDTECH TOP BAR -->
+<div class="goldtech-top-bar" style="background: #1a1a1a; color: #cccccc; font-size: 13px; font-family: Arial, sans-serif; padding: 8px 0; border-bottom: 1px solid #333333; position: relative; z-index: 9999;">
+  <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
+    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+      <a href="mailto:info@goldtechgraphicsinfo.com" style="color: #cccccc; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="M22 4L12 13L2 4"></path></svg>
+        info@goldtechgraphicsinfo.com
+      </a>
+      <span style="color: #555555;">|</span>
+      <a href="tel:+919810897344" style="color: #cccccc; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"></path></svg>
+        +91-98108 97344
+      </a>
+    </div>
+    <div style="display: flex; align-items: center; gap: 12px;">
+      <a href="https://www.facebook.com/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path></svg>
+      </a>
+      <a href="https://www.instagram.com/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#cccccc" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"></rect><circle cx="12" cy="12" r="5"></circle><circle cx="17.5" cy="6.5" r="1.5" fill="#cccccc"></circle></svg>
+      </a>
+      <a href="https://www.linkedin.com/company/goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+      </a>
+      <a href="https://www.youtube.com/@goldtechgraphics" target="_blank" style="width: 28px; height: 28px; background: #333333; border-radius: 50%; display: flex; align-items: center; justify-content: center; text-decoration: none;">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#cccccc"><path d="M22.54 6.42a2.78 2.78 0 00-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 00-1.94 2A29 29 0 001 11.75a29 29 0 00.46 5.33A2.78 2.78 0 003.4 19.1c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 001.94-2 29 29 0 00.46-5.25 29 29 0 00-.46-5.43z"></path><polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="#1a1a1a"></polygon></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
 
 <a class="skip-link screen-reader-text" href="#content">
 		Skip to content</a>
@@ -1166,7 +1206,7 @@ table th a {
 </ul>
 </li>
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8458"><a href="/contact/" class="elementor-item menu-link">Contact</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
+<li class="menu-item"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
 					<div class="elementor-menu-toggle" role="button" tabindex="0" aria-label="Menu Toggle" aria-expanded="false">
 			<svg aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--open e-font-icon-svg e-eicon-menu-bar" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M104 333H896C929 333 958 304 958 271S929 208 896 208H104C71 208 42 237 42 271S71 333 104 333ZM104 583H896C929 583 958 554 958 521S929 458 896 458H104C71 458 42 487 42 521S71 583 104 583ZM104 833H896C929 833 958 804 958 771S929 708 896 708H104C71 708 42 737 42 771S71 833 104 833Z"></path></svg><svg aria-hidden="true" role="presentation" class="elementor-menu-toggle__icon--close e-font-icon-svg e-eicon-close" viewBox="0 0 1000 1000" xmlns="http://www.w3.org/2000/svg"><path d="M742 167L500 408 258 167C246 154 233 150 217 150 196 150 179 158 167 167 154 179 150 196 150 212 150 229 154 242 171 254L408 500 167 742C138 771 138 800 167 829 196 858 225 858 254 829L496 587 738 829C750 842 767 846 783 846 800 846 817 842 829 829 842 817 846 804 846 783 846 767 842 750 829 737L588 500 833 258C863 229 863 200 833 171 804 137 775 137 742 167Z"></path></svg>			<span class="elementor-screen-only">Menu</span>
 		</div>
@@ -1842,7 +1882,7 @@ table th a {
 </ul>
 </li>
 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-8458"><a href="/contact/" class="elementor-item menu-link" tabindex="-1">Contact</a></li>
-<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
+<li class="menu-item"><a href="/admin/" class="elementor-item">Admin</a></li></ul>			</nav>
 						</div>
 				</div>
 				</div>
