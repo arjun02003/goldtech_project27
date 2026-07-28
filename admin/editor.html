@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visual Page Editor - Goldtech Graphics CMS</title>
+  <link rel="stylesheet" href="/admin/css/admin.css">
+  <script src="https://unpkg.com/feather-icons"></script>
+  <style>
+    body {
+      flex-direction: column;
+      overflow: hidden;
+      height: 100vh;
+      background-color: #0b0b0e;
+    }
+    
+    /* Top Bar */
+    .editor-top-bar {
+      height: 64px;
+      background-color: var(--bg-secondary);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 1.5rem;
+      z-index: 100;
+    }
+
+    .editor-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .back-btn:hover {
+      color: var(--text-primary);
+      border-color: var(--text-secondary);
+    }
+
+    .page-title-label {
+      font-family: var(--font-heading);
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 0.1rem;
+    }
+
+    .page-path-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    /* Device Toggles */
+    .device-toggles {
+      display: flex;
+      background-color: var(--bg-tertiary);
+      border: 1px solid var(--border-color);
+      padding: 3px;
+      border-radius: 8px;
+      gap: 2px;
+    }
+
+    .device-btn {
+      background: transparent;
+      border: none;
+      color: var(--text-secondary);
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .device-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .device-btn.active {
+      background-color: var(--bg-secondary);
+      color: var(--accent-color);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .editor-actions {
+      display: flex;
+      gap: 0.75rem;
+    }
+
+    /* Iframe Wrapper Sandbox */
+    .iframe-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background-color: #08080a;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .editor-iframe-wrapper {
+      width: 100%;
+      height: 100%;
+      border-radius: 12px;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      background-color: #fff;
+      transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Device Sizes simulation */
+    .editor-iframe-wrapper.desktop {
+      width: 100%;
+      height: 100%;
+    }
+
+    .editor-iframe-wrapper.tablet {
+      width: 768px;
+      height: 95%;
+    }
+
+    .editor-iframe-wrapper.mobile {
+      width: 390px;
+      height: 85%;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    /* Saving overlay spinner */
+    .save-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(10, 10, 12, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .save-overlay.active {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(245, 158, 11, 0.1);
+      border-top-color: var(--accent-color);
+      border-radius: 50%;
+      animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top bar -->
+  <div class="editor-top-bar">
+    <div class="editor-info">
+      <button class="back-btn" onclick="goBack()" title="Back to Dashboard">
+        <i data-feather="arrow-left"></i>
+      </button>
+      <div>
+        <div class="page-title-label" id="pageTitleLabel">Loading...</div>
+        <div class="page-path-label" id="pagePathLabel">Path: --</div>
+      </div>
+    </div>
+
+    <!-- Layout simulation toggles -->
+    <div class="device-toggles">
+      <button class="device-btn active" data-size="desktop" title="Desktop View">
+        <i data-feather="monitor"></i>
+      </button>
+      <button class="device-btn" data-size="tablet" title="Tablet View">
+        <i data-feather="tablet"></i>
+      </button>
+      <button class="device-btn" data-size="mobile" title="Mobile View">
+        <i data-feather="phone"></i>
+      </button>
+    </div>
+
+    <!-- Actions -->
+    <div class="editor-actions">
+      <button class="btn btn-secondary" onclick="goBack()">Cancel</button>
+      <button class="btn btn-primary" id="savePageBtn">
+        <i data-feather="save"></i>
+        <span>Save Changes</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Workspace Sandbox -->
+  <div class="iframe-container">
+    <div class="editor-iframe-wrapper desktop" id="iframeWrapper">
+      <iframe id="editorIframe" src="about:blank"></iframe>
+    </div>
+    
+    <div class="save-overlay" id="saveOverlay">
+      <div class="spinner"></div>
+      <p style="font-weight: 600; color: var(--text-primary);" id="saveStatusText">Saving page changes...</p>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div class="toast" id="toast">
+    <div style="display: flex; align-items: center; gap: 0.75rem;">
+      <i data-feather="check-circle" id="toastIcon"></i>
+      <span id="toastText">Page saved successfully.</span>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="/admin/js/editor.js"></script>
+  <script>
+    feather.replace();
+  </script>
+</body>
+</html>

@@ -1,0 +1,143 @@
+/* Editor Hover and Focus Outlines */
+[contenteditable="true"] {
+  outline: none;
+  min-height: 1em;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+[contenteditable="true"]:hover {
+  box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.4);
+  border-radius: 4px;
+  cursor: text;
+}
+
+[contenteditable="true"]:focus {
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.8) !important;
+  border-radius: 4px;
+  background-color: rgba(245, 158, 11, 0.05);
+}
+
+/* Image selection highlighting */
+img.editable-img {
+  cursor: pointer;
+  transition: filter 0.2s ease, box-shadow 0.2s ease;
+}
+
+img.editable-img:hover {
+  filter: brightness(0.9);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.6) !important;
+}
+
+img.editable-img.editing-selected {
+  box-shadow: 0 0 0 4px var(--accent-color) !important;
+}
+
+/* Injected uploader modal inside the iframe */
+.cms-inject-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999999;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: #fff;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.cms-inject-modal.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.cms-inject-content {
+  background: #121216;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+  overflow: hidden;
+}
+
+.cms-inject-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.cms-inject-close {
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #9ca3af;
+  background: transparent;
+  border: none;
+}
+
+.cms-inject-close:hover {
+  color: #fff;
+}
+
+.cms-inject-body {
+  padding: 1.25rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.cms-inject-upload-section {
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-bottom: 1.25rem;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.02);
+  transition: all 0.2s ease;
+}
+
+.cms-inject-upload-section:hover {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.05);
+}
+
+.cms-inject-gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 0.75rem;
+  max-height: 250px;
+  overflow-y: auto;
+}
+
+.cms-inject-gallery-item {
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease;
+}
+
+.cms-inject-gallery-item:hover {
+  transform: scale(1.04);
+  border-color: #f59e0b;
+}
+
+.cms-inject-gallery-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

@@ -1,0 +1,16 @@
+{
+  "name": "goldtechgraphicsinfo-admin-cms",
+  "version": "1.0.0",
+  "description": "Admin panel and CMS for editing the static clone website",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "express": "^4.19.2",
+    "multer": "^1.4.5-lts.1",
+    "cheerio": "^1.0.0-rc.12"
+  }
+}
