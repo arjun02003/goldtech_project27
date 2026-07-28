@@ -4,9 +4,16 @@ const multer = require('multer');
 const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
+const cors = require('cors');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// Enable CORS for Vercel frontend
+app.use(cors({
+  origin: ['https://goldtech-project27.vercel.app', 'http://localhost:3000'],
+  credentials: true
+}));
 
 // Configuration
 const ADMIN_USERNAME = 'admin';
