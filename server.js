@@ -53,6 +53,14 @@ app.get('/admin', (req, res) => {
   res.redirect('/admin/index.html');
 });
 
+// Redirect singular our-product requests to correct plural route
+app.get('/our-product', (req, res) => {
+  res.redirect('/our-products/');
+});
+app.get('/our-product/', (req, res) => {
+  res.redirect('/our-products/');
+});
+
 // Intercept HTML pages for editor injection when ?admin_edit=true
 app.use((req, res, next) => {
   if (req.query.admin_edit === 'true') {
