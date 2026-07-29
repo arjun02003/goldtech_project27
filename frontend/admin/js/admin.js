@@ -15,7 +15,7 @@ const dropzone = document.getElementById('dropzone');
 const logoutBtn = document.getElementById('logoutBtn');
 const toastEl = document.getElementById('toast');
 
-// Check authentication status first
+// Check authentication status first, then load data
 async function checkAuthentication() {
   try {
     const res = await fetch('/api/auth-status');
@@ -23,6 +23,10 @@ async function checkAuthentication() {
     const data = await res.json();
     if (!data.authenticated) {
       window.location.href = '/admin/login.html?redirect=' + encodeURIComponent(window.location.pathname);
+    } else {
+      // Auth confirmed — now load data
+      loadPages();
+      loadUploads();
     }
   } catch (err) {
     console.error('Failed to verify auth status:', err);
@@ -352,7 +356,5 @@ logoutBtn.addEventListener('click', async () => {
   }
 });
 
-// Initializations
+// Initializations — auth first, then data load happens inside checkAuthentication
 checkAuthentication();
-loadPages();
-loadUploads();
