@@ -2581,42 +2581,103 @@ solutions</h3>				</div>
 			window.addEventListener('resize',function(){ci=0;awardsSlide(0)});
 		})();
 		</script>
-		<div class="elementor-element elementor-element-d6825fb e-flex e-con-boxed e-con e-parent" data-id="d6825fb" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-				<div class="elementor-element elementor-element-e317241 elementor-widget elementor-widget-spacer" data-id="e317241" data-element_type="widget" data-e-type="widget" data-widget_type="spacer.default">
-				<div class="elementor-widget-container">
-							<div class="elementor-spacer">
-			<div class="elementor-spacer-inner"></div>
+        <!-- BRANCHES SECTION - Timeline Design -->
+		<style>
+		#branches-section{background:#fff;padding:80px 0 60px;overflow:hidden}
+		.branches-wrapper{max-width:1200px;margin:0 auto;padding:0 40px}
+		.branches-top-label{text-align:center;font-size:12px;font-weight:700;color:#c0a232;letter-spacing:2.5px;text-transform:uppercase;margin:0 0 8px}
+		.branches-title{text-align:center;font-size:2.2rem;font-weight:800;color:#0d1b2a;margin:0 0 50px}
+		.branches-timeline{display:flex;align-items:center;gap:0;position:relative}
+		.branches-timeline-nav{width:48px;height:48px;border-radius:50%;border:2px solid #0d1b2a;background:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;color:#0d1b2a;transition:all .25s;flex-shrink:0;z-index:2}
+		.branches-timeline-nav:hover{background:#0d1b2a;color:#fff}
+		.branches-timeline-track-wrap{flex:1;overflow:hidden;position:relative;margin:0 16px}
+		.branches-timeline-track{display:flex;align-items:center;position:relative;transition:transform .5s cubic-bezier(.4,0,.2,1);padding:20px 0}
+		.branches-timeline-track::before{content:'';position:absolute;top:50%;left:0;right:0;height:3px;background:#e5e7eb;transform:translateY(-50%);z-index:0}
+		.branch-node{flex:0 0 200px;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;cursor:pointer}
+		.branch-node-dot{width:14px;height:14px;border-radius:50%;background:#e5e7eb;border:3px solid #fff;box-shadow:0 0 0 3px #e5e7eb;transition:all .3s;margin-bottom:14px}
+		.branch-node.active .branch-node-dot{background:#dc2626;box-shadow:0 0 0 3px #dc2626;transform:scale(1.2)}
+		.branch-node:hover .branch-node-dot{background:#c0a232;box-shadow:0 0 0 3px #c0a232}
+		.branch-node-label{background:#dc2626;color:#fff;font-size:13px;font-weight:700;padding:6px 18px;border-radius:4px;white-space:nowrap;transition:all .3s;letter-spacing:.5px}
+		.branch-node.active .branch-node-label{transform:scale(1.08);box-shadow:0 4px 16px rgba(220,38,38,.3)}
+		.branch-node:hover .branch-node-label{background:#c0a232;transform:scale(1.05)}
+		.branch-detail{max-width:800px;margin:40px auto 0;background:#f9fafb;border-radius:16px;padding:36px 40px;box-shadow:0 2px 16px rgba(0,0,0,.06);display:none;animation:branchFadeIn .4s ease}
+		.branch-detail.active{display:block}
+		@keyframes branchFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+		.branch-detail-city{font-size:1.3rem;font-weight:800;color:#0d1b2a;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+		.branch-detail-city svg{width:22px;height:22px;fill:#dc2626}
+		.branch-detail-addr{font-size:14.5px;color:#6b7280;line-height:1.7;margin:0 0 14px}
+		.branch-detail-phone{display:inline-flex;align-items:center;gap:8px;background:#0d1b2a;color:#fff;padding:10px 22px;border-radius:8px;font-size:13.5px;font-weight:600;text-decoration:none;transition:background .25s}
+		.branch-detail-phone:hover{background:#c0a232}
+		.branch-detail-phone svg{width:16px;height:16px;fill:#fff}
+		.branches-map{margin:50px auto 0;max-width:900px;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,.1)}
+		.branches-map iframe{width:100%;height:420px;border:0;display:block}
+		@media(max-width:768px){.branches-title{font-size:1.6rem;margin-bottom:36px}.branch-node{flex:0 0 160px}.branches-wrapper{padding:0 20px}#branches-section{padding:60px 0 40px}.branch-detail{padding:28px 24px}.branches-map iframe{height:300px}}
+		@media(max-width:480px){.branch-node{flex:0 0 140px}.branch-node-label{font-size:11px;padding:5px 12px}.branches-title{font-size:1.35rem}}
+		</style>
+		<div id="branches-section">
+		<div class="branches-wrapper">
+			<p class="branches-top-label">Our Network</p>
+			<h2 class="branches-title">Our Branches Across India</h2>
+			<div class="branches-timeline">
+				<button class="branches-timeline-nav" onclick="branchSlide(-1)" aria-label="Previous">&#8592;</button>
+				<div class="branches-timeline-track-wrap">
+					<div class="branches-timeline-track" id="branches-track">
+						<div class="branch-node active" onclick="showBranch(0)"><div class="branch-node-dot"></div><span class="branch-node-label">Ghaziabad</span></div>
+						<div class="branch-node" onclick="showBranch(1)"><div class="branch-node-dot"></div><span class="branch-node-label">Bhopal</span></div>
+						<div class="branch-node" onclick="showBranch(2)"><div class="branch-node-dot"></div><span class="branch-node-label">Kolkata</span></div>
+						<div class="branch-node" onclick="showBranch(3)"><div class="branch-node-dot"></div><span class="branch-node-label">Siliguri</span></div>
+						<div class="branch-node" onclick="showBranch(4)"><div class="branch-node-dot"></div><span class="branch-node-label">Hyderabad</span></div>
+						<div class="branch-node" onclick="showBranch(5)"><div class="branch-node-dot"></div><span class="branch-node-label">Delhi</span></div>
+						<div class="branch-node" onclick="showBranch(6)"><div class="branch-node-dot"></div><span class="branch-node-label">Thane</span></div>
+						<div class="branch-node" onclick="showBranch(7)"><div class="branch-node-dot"></div><span class="branch-node-label">Gorakhpur</span></div>
+						<div class="branch-node" onclick="showBranch(8)"><div class="branch-node-dot"></div><span class="branch-node-label">Bhubaneswar</span></div>
+						<div class="branch-node" onclick="showBranch(9)"><div class="branch-node-dot"></div><span class="branch-node-label">Patna</span></div>
+					</div>
+				</div>
+				<button class="branches-timeline-nav" onclick="branchSlide(1)" aria-label="Next">&#8594;</button>
+			</div>
+			<div class="branch-detail active" id="bd-0">
+				<h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Ghaziabad (Head Office)</h3>
+				<p class="branch-detail-addr">Plot No. 109, 110, Anand Industrial Estate, Mohan Nagar, Ghaziabad, UP – 201007</p>
+				<a href="tel:+919810897344" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-98108 97344</a>
+			</div>
+			<div class="branch-detail" id="bd-1"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Bhopal</h3><p class="branch-detail-addr">Plot No. 12, Govindpura, Near Symphony Mall, Bhopal – 462023</p><a href="tel:+919810897344" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-98108 97344</a></div>
+			<div class="branch-detail" id="bd-2"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Kolkata</h3><p class="branch-detail-addr">Room No. 591, 4th Floor Stephen House 56E Hemanta Basu Sarani, Kolkata – 700001</p><a href="tel:+917449437877" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-74494 37877</a></div>
+			<div class="branch-detail" id="bd-3"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Siliguri</h3><p class="branch-detail-addr">Shop No. 33, 1st Floor, City Plaza, Sevoke Road, Opp. Payal Cinema, Siliguri – 734001</p><a href="tel:+918882264736" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-88822 64736</a></div>
+			<div class="branch-detail" id="bd-4"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Hyderabad</h3><p class="branch-detail-addr">Shop No. 106, First Floor, Down Town Mall, Lakdi-Ka-Pul, Hyderabad – 500001</p><a href="tel:+917386062459" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-73860 62459</a></div>
+			<div class="branch-detail" id="bd-5"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Delhi</h3><p class="branch-detail-addr">Shop No. 1973, Chuna Mandi, Paharganj, New Delhi – 110055</p><a href="tel:+919818360956" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-98183 60956</a></div>
+			<div class="branch-detail" id="bd-6"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Maharashtra (Thane)</h3><p class="branch-detail-addr">Office No. 201, Rayansh Building, Thane Maharashtra – 400602</p><a href="tel:+917744997342" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-77449 97342</a></div>
+			<div class="branch-detail" id="bd-7"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Gorakhpur</h3><p class="branch-detail-addr">Shop No. 4, Vishwanath Trade Center, Hajaripur, Gorakhpur, UP – 273001</p><a href="tel:+917309349252" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-73093 49252</a></div>
+			<div class="branch-detail" id="bd-8"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Bhubaneswar</h3><p class="branch-detail-addr">Plot No. G3A, Opp. Highway Honda, Rudrapur, Odisha – 752101</p><a href="tel:+919088660669" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-90886 60669</a></div>
+			<div class="branch-detail" id="bd-9"><h3 class="branch-detail-city"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>Patna</h3><p class="branch-detail-addr">Zero Mile, Jakariyapur, Near Akash Banquet Hall, Opp. Transport Nagar, Patna</p><a href="tel:+919279490208" class="branch-detail-phone"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 011 1V20a1 1 0 01-1 1A17 17 0 013 4a1 1 0 011-1h3.5a1 1 0 011 1c0 1.25.2 2.46.57 3.58a1 1 0 01-.24 1.01l-2.21 2.2z"/></svg>+91-92794 90208</a></div>
+			<div class="branches-map">
+				<iframe src="https://www.google.com/maps/d/u/0/embed?mid=160HSf8fqECcDuNhmqqGFJ-MXnPdb160&ehbc=2E312F" allowfullscreen loading="lazy"></iframe>
+			</div>
 		</div>
-						</div>
-				</div>
-				<div class="elementor-element elementor-element-c06ef88 elementor-widget elementor-widget-heading" data-id="c06ef88" data-element_type="widget" data-e-type="widget" data-widget_type="heading.default">
-				<div class="elementor-widget-container">
-					<h2 class="elementor-heading-title elementor-size-default">BRANCHES
-</h2>				</div>
-				</div>
-					</div>
-				</div>
-		<div class="elementor-element elementor-element-dc31f39 e-con-full e-flex e-con e-parent" data-id="dc31f39" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-				<div class="elementor-element elementor-element-e2da986 elementor-widget elementor-widget-text-editor" data-id="e2da986" data-element_type="widget" data-e-type="widget" data-widget_type="text-editor.default">
-				<div class="elementor-widget-container">
-									<div><table><thead><tr><th><span style="color: #ffffff;">Location</span></th><th><span style="color: #ffffff;">Address</span></th><th><span style="color: #ffffff;">Contact</span></th></tr></thead><tbody><tr><td><span style="color: #ffffff;">Ghaziabad</span></td><td><span style="color: #ffffff;">Plot No. 109, 110, Anand Industrial Estate, Mohan Nagar, Ghaziabad, UP – 201007</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+919810897344">+91-98108 97344</a></span></td></tr><tr><td><span style="color: #ffffff;">Bhopal</span></td><td><span style="color: #ffffff;">Plot No. 12, Govindpura, Near Symphony Mall, Bhopal – 462023</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+919810897344">+91-98108 97344</a></span></td></tr><tr><td><span style="color: #ffffff;">Kolkata</span></td><td><span style="color: #ffffff;">Room No. 591, 4th Floor Stephen House 56E Hemanta Basu Sarani&nbsp;</span><span style="color: #ffffff;">Kolkata – 700001</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+917449437877">+91-74494 37877</a></span></td></tr><tr><td><span style="color: #ffffff;">Siliguri</span></td><td><span style="color: #ffffff;">Shop No. 33, 1st Floor, City Plaza, Sevoke Road, Opp. Payal Cinema, Siliguri – 734001</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+918882264736">+91-88822 64736</a></span></td></tr><tr><td><span style="color: #ffffff;">Hyderabad</span></td><td><span style="color: #ffffff;">Shop No. 106, First Floor, Down Town Mall, Lakdi-Ka-Pul, Hyderabad – 500001</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+917386062459">+91-73860 62459</a></span></td></tr><tr><td><span style="color: #ffffff;">Delhi</span></td><td><span style="color: #ffffff;">Shop No. 1973, Chuna Mandi, Paharganj, New Delhi – 110055</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+919818360956">+91-98183 60956</a></span></td></tr><tr><td><span style="color: #ffffff;">Maharashtra (Thane)</span></td><td><span style="color: #ffffff;">Office No.&nbsp; 201, Rayansh Building , Thane Maharashtra – 400602</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+917744997342">+91-77449 97342</a></span></td></tr><tr><td><span style="color: #ffffff;">Gorakhpur</span></td><td><span style="color: #ffffff;">Shop No. 4, Vishwanath Trade Center, Hajaripur, Gorakhpur, UP – 273001</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+917309349252">+91-73093 49252</a></span></td></tr><tr><td><span style="color: #ffffff;">Bhubaneswar</span></td><td><span style="color: #ffffff;">Plot No. G3A, Opp. Highway Honda, Rudrapur, Odisha – 752101</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+919088660669">+91-90886 60669</a></span></td></tr><tr><td><span style="color: #ffffff;">Patna</span></td><td><span style="color: #ffffff;">Zero Mile, Jakariyapur, Near Akash Banquet Hall, Opp. Transport Nagar, Patna</span></td><td><span style="color: #ffffff;"><a style="color: #ffffff;" href="tel:+919279490208">+91-92794 90208</a></span></td></tr></tbody></table></div>								</div>
-				</div>
-				</div>
-		<div class="elementor-element elementor-element-341ca7c e-flex e-con-boxed e-con e-parent" data-id="341ca7c" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-					<div class="e-con-inner">
-		<div class="elementor-element elementor-element-e39f6d4 e-con-full e-flex e-con e-child" data-id="e39f6d4" data-element_type="container" data-e-type="container" data-settings="{&quot;background_background&quot;:&quot;classic&quot;}">
-				</div>
-					</div>
-				</div>
-		<div class="elementor-element elementor-element-98edc63 e-flex e-con-boxed e-con e-parent" data-id="98edc63" data-element_type="container" data-e-type="container">
-					<div class="e-con-inner">
-				<div class="elementor-element elementor-element-3ace67e elementor-widget elementor-widget-html" data-id="3ace67e" data-element_type="widget" data-e-type="widget" data-widget_type="html.default">
-				<div class="elementor-widget-container">
-					<iframe src="https://www.google.com/maps/d/u/0/embed?mid=160HSf8fqECcDuNhmqqGFJ-MXnPdb160&amp;ehbc=2E312F" width="840" height="480"></iframe>				</div>
-				</div>
-					</div>
-				</div>
+		</div>
+		<script>
+		(function(){
+			var bIdx=0,bSlideIdx=0;
+			function showBranch(i){
+				bIdx=i;
+				document.querySelectorAll('.branch-node').forEach(function(n,j){n.classList.toggle('active',j===i)});
+				document.querySelectorAll('.branch-detail').forEach(function(d,j){d.classList.toggle('active',j===i)});
+			}
+			function branchSlide(dir){
+				var track=document.getElementById('branches-track');if(!track)return;
+				var nodes=track.querySelectorAll('.branch-node');
+				var wrap=track.parentElement;
+				var wrapW=wrap.getBoundingClientRect().width;
+				var nodeW=200;
+				var totalW=nodes.length*nodeW;
+				var maxShift=Math.max(0,totalW-wrapW);
+				bSlideIdx=Math.max(0,Math.min(maxShift,bSlideIdx+(dir*nodeW*2)));
+				track.style.transform='translateX(-'+bSlideIdx+'px)';
+			}
+			window.showBranch=showBranch;
+			window.branchSlide=branchSlide;
+		})();
+		</script>
 				</div>
 		
 	
