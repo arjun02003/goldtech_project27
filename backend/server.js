@@ -18,6 +18,7 @@ app.use(cors({
 // Configuration
 const ADMIN_USERNAME = 'admin';
 const ADMIN_PASSWORD = 'admin123';
+const FRONTEND_DIR = path.join(__dirname, '..', 'frontend');
 const AUTH_TOKEN = 'goldtech_auth_token_secure_2026';
 
 // Initialize directories
@@ -84,7 +85,7 @@ app.use((req, res, next) => {
       reqPath += '/index.html';
     }
 
-    const filePath = path.join(__dirname, reqPath);
+    const filePath = path.join(FRONTEND_DIR, reqPath);
     if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
       try {
         let html = fs.readFileSync(filePath, 'utf8');
@@ -106,7 +107,7 @@ app.use((req, res, next) => {
 
 // Serve static assets
 app.use('/uploads', express.static(uploadsDir));
-app.use('/admin', express.static(path.join(__dirname, 'admin')));
+app.use('/admin', express.static(path.join(__dirname, '../frontend/admin')));
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // Auth APIs
@@ -133,7 +134,7 @@ app.get('/api/auth-status', (req, res) => {
 // Pages CRUD APIs
 app.get('/api/pages', checkAuth, (req, res) => {
   try {
-    const rootDir = __dirname;
+    const rootDir = FRONTEND_DIR;
     const dirs = fs.readdirSync(rootDir, { withFileTypes: true });
     const pages = [];
 
@@ -151,7 +152,7 @@ app.get('/api/pages', checkAuth, (req, res) => {
       if (dirent.isDirectory()) {
         const name = dirent.name;
         // Skip system directories
-        if (['.git', 'node_modules', 'admin', 'uploads', 'scratch'].includes(name)) {
+        if (['.git', 'node_modules', 'admin', 'uploads', 'scratch', 'backend'].includes(name)) {
           return;
         }
 
@@ -192,10 +193,10 @@ app.get('/api/pages/read', checkAuth, (req, res) => {
     return res.status(400).json({ error: 'File parameter is required.' });
   }
 
-  const filePath = path.join(__dirname, pageFile);
+  const filePath = path.join(FRONTEND_DIR, pageFile);
   
   // Prevent directory traversal
-  if (!filePath.startsWith(__dirname)) {
+  if (!filePath.startsWith(FRONTEND_DIR)) {
     return res.status(403).json({ error: 'Access denied.' });
   }
 
@@ -218,10 +219,10 @@ app.post('/api/pages/write', checkAuth, (req, res) => {
     return res.status(400).json({ error: 'File and HTML parameters are required.' });
   }
 
-  const filePath = path.join(__dirname, pageFile);
+  const filePath = path.join(FRONTEND_DIR, pageFile);
   
   // Prevent directory traversal
-  if (!filePath.startsWith(__dirname)) {
+  if (!filePath.startsWith(FRONTEND_DIR)) {
     return res.status(403).json({ error: 'Access denied.' });
   }
 
@@ -300,7 +301,7 @@ app.post('/api/pages/create', checkAuth, (req, res) => {
 
   // Validate slug to prevent folder names with special chars or traversal
   const safeSlug = slug.toLowerCase().replace(/[^a-z0-9-_]/g, '-').replace(/-+/g, '-');
-  const newPageDir = path.join(__dirname, safeSlug);
+  const newPageDir = path.join(FRONTEND_DIR, safeSlug);
 
   if (fs.existsSync(newPageDir)) {
     return res.status(400).json({ error: `A page with slug '${safeSlug}' already exists.` });
@@ -308,14 +309,14 @@ app.post('/api/pages/create', checkAuth, (req, res) => {
 
   // Find a template page to clone. Defaulting to 3d-printing-machine, or first available product page
   let templateSlug = '3d-printing-machine';
-  let templatePath = path.join(__dirname, templateSlug, 'index.html');
+  let templatePath = path.join(FRONTEND_DIR, templateSlug, 'index.html');
 
   if (!fs.existsSync(templatePath)) {
     // Scan root for any product folder with an index.html as a fallback
-    const dirs = fs.readdirSync(__dirname, { withFileTypes: true });
+    const dirs = fs.readdirSync(FRONTEND_DIR, { withFileTypes: true });
     for (const dir of dirs) {
-      if (dir.isDirectory() && !['.git', 'node_modules', 'admin', 'uploads', 'scratch'].includes(dir.name)) {
-        const checkPath = path.join(__dirname, dir.name, 'index.html');
+      if (dir.isDirectory() && !['.git', 'node_modules', 'admin', 'uploads', 'scratch', 'backend'].includes(dir.name)) {
+        const checkPath = path.join(FRONTEND_DIR, dir.name, 'index.html');
         if (fs.existsSync(checkPath)) {
           templateSlug = dir.name;
           templatePath = checkPath;
@@ -327,7 +328,7 @@ app.post('/api/pages/create', checkAuth, (req, res) => {
 
   if (!fs.existsSync(templatePath)) {
     // If no template folder found, check if root index.html exists
-    const rootIndex = path.join(__dirname, 'index.html');
+    const rootIndex = path.join(FRONTEND_DIR, 'index.html');
     if (fs.existsSync(rootIndex)) {
       templatePath = rootIndex;
     } else {
@@ -386,7 +387,7 @@ app.post('/api/pages/create', checkAuth, (req, res) => {
     // 4. Update the navigation menus on ALL pages
     const menuLinkHtml = `<li class="menu-item menu-item-type-post_type menu-item-object-page"><a href="/${safeSlug}/" class="elementor-item">${title}</a></li>`;
     
-    const rootDir = __dirname;
+    const rootDir = FRONTEND_DIR;
     const dirs = fs.readdirSync(rootDir, { withFileTypes: true });
     
     // Add home page index.html
@@ -398,7 +399,7 @@ app.post('/api/pages/create', checkAuth, (req, res) => {
     dirs.forEach(dirent => {
       if (dirent.isDirectory()) {
         const name = dirent.name;
-        if (['.git', 'node_modules', 'admin', 'uploads', 'scratch'].includes(name)) return;
+        if (['.git', 'node_modules', 'admin', 'uploads', 'scratch', 'backend'].includes(name)) return;
         const p = path.join(rootDir, name, 'index.html');
         if (fs.existsSync(p)) {
           htmlFilesToUpdate.push(p);
