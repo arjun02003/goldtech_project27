@@ -1,6 +1,25 @@
 (function() {
   let activeImageEl = null;
 
+  // Detect API base URL (config.js doesn't load inside iframe)
+  const RENDER_HOSTS = ['goldtech-project27-1.onrender.com', 'localhost'];
+  const isOnBackend = RENDER_HOSTS.some(h => window.location.hostname.includes(h));
+  const API_BASE = isOnBackend ? '' : 'https://goldtech-project27-1.onrender.com';
+
+  // Get auth token from parent window's localStorage
+  let authToken = '';
+  try { authToken = window.parent.localStorage.getItem('admin_token') || ''; } catch(e) {}
+
+  // Helper: fetch with auth
+  function apiFetch(url, options = {}) {
+    const fullUrl = API_BASE + url;
+    if (!options.headers) options.headers = {};
+    if (authToken && !(options.headers instanceof Headers)) {
+      options.headers['Authorization'] = 'Bearer ' + authToken;
+    }
+    options.credentials = 'include';
+    return fetch(fullUrl, options);
+  }
   // Make text elements editable
   function enableTextEditing() {
     const selectors = 'h1, h2, h3, h4, h5, h6, p, li, td, th, .elementor-heading-title, .elementor-button-text, .entry-title';
@@ -112,7 +131,7 @@
   async function loadModalGallery() {
     const galleryEl = document.getElementById('cmsModalGallery');
     try {
-      const res = await fetch('/api/uploads');
+      const res = await apiFetch('/api/uploads');
       const data = await res.json();
       const images = data.images || [];
       
@@ -126,8 +145,8 @@
       }
       
       galleryEl.innerHTML = images.map(img => `
-        <div class="cms-inject-gallery-item" data-url="${img.url}">
-          <img src="${img.url}" class="cms-inject-gallery-img" alt="${img.name}">
+        <div class="cms-inject-gallery-item" data-url="${API_BASE + img.url}">
+          <img src="${API_BASE + img.url}" class="cms-inject-gallery-img" alt="${img.name}">
         </div>
       `).join('');
 
@@ -160,7 +179,7 @@
     galleryEl.innerHTML = '<div style="text-align: center; width: 100%; padding: 1.5rem; font-size: 0.85rem;">Uploading photo...</div>';
 
     try {
-      const res = await fetch('/api/upload', {
+      const res = await apiFetch('/api/upload', {
         method: 'POST',
         body: formData
       });
