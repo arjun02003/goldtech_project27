@@ -73,9 +73,11 @@ app.get('/our-product/', (req, res) => {
 // Intercept HTML pages for editor injection when ?admin_edit=true
 app.use((req, res, next) => {
   if (req.query.admin_edit === 'true') {
-    // Check auth cookie, if not valid redirect to login
-    const token = req.cookies.admin_token;
-    if (token !== AUTH_TOKEN) {
+    // Check auth via cookie, Authorization header, OR query param (for iframe loading)
+    const cookieToken = req.cookies.admin_token;
+    const headerToken = (req.headers.authorization || '').replace('Bearer ', '');
+    const queryToken = req.query.auth_token || '';
+    if (cookieToken !== AUTH_TOKEN && headerToken !== AUTH_TOKEN && queryToken !== AUTH_TOKEN) {
       return res.redirect('/admin/login.html?redirect=' + encodeURIComponent(req.originalUrl));
     }
 

@@ -35,7 +35,10 @@ function initEditor() {
   pageTitleLabel.textContent = `Editing: ${formattedTitle}`;
 
   // Load page in iframe with editor parameter
-  iframe.src = `/${pageFile}?admin_edit=true`;
+  // Pass token as query param for iframe auth (browser can't send Authorization headers on iframe src)
+  const token = localStorage.getItem('admin_token') || '';
+  const backendBase = window.API_BASE_URL || '';
+  iframe.src = `${backendBase}/${pageFile}?admin_edit=true&auth_token=${encodeURIComponent(token)}`;
 
   // Set dirty flag when iframe documents receive edits
   window.addEventListener('message', (event) => {
