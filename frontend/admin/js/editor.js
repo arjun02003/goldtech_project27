@@ -103,14 +103,17 @@ async function savePage() {
 
     if (res.ok) {
       isDirty = false;
+      // Clear pages cache so admin panel reloads fresh data
+      pagesCache = null;
       showToast('Page saved successfully!', 'success');
     } else {
-      const data = await res.json();
-      showToast(data.error || 'Failed to save page.', 'error');
+      let errMsg = `Save failed (HTTP ${res.status})`;
+      try { const d = await res.json(); errMsg = d.error || errMsg; } catch(e) {}
+      showToast(errMsg, 'error');
     }
   } catch (err) {
     console.error('Failed to save:', err);
-    showToast('Failed to save page due to a network error.', 'error');
+    showToast('Network error: ' + (err.message || 'Check console for details'), 'error');
   } finally {
     saveOverlay.classList.remove('active');
   }
