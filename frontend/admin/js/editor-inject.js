@@ -244,9 +244,32 @@
     document.addEventListener('DOMContentLoaded', () => {
       enableTextEditing();
       enableImageEditing();
+      listenForMessages();
     });
   } else {
     enableTextEditing();
     enableImageEditing();
+    listenForMessages();
   }
+
+  // postMessage bridge: parent editor requests HTML cross-origin via this
+  function listenForMessages() {
+    window.addEventListener('message', (event) => {
+      if (event.data === 'get_html') {
+        // Clean up editor artifacts before sending HTML
+        window.prepareForSave();
+
+        // Small delay so cleanup is done
+        setTimeout(() => {
+          const html = document.documentElement.outerHTML;
+          // Send back to parent window
+          window.parent.postMessage({ type: 'page_html', html: html }, '*');
+        }, 100);
+
+      } else if (event.data === 'restore_after_save') {
+        window.restoreAfterSave();
+      }
+    });
+  }
+
 })();

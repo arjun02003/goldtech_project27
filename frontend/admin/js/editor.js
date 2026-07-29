@@ -71,41 +71,34 @@ async function savePage() {
   saveOverlay.classList.add('active');
 
   try {
-    // Read the current DOM HTML directly from the iframe
-    const doc = iframe.contentWindow.document;
-    
-    // Let the injected script know we are about to save, so it can clean up
-    if (iframe.contentWindow.prepareForSave) {
-      iframe.contentWindow.prepareForSave();
-    }
-    
-    // Wait a brief moment for the cleanup to run
-    await new Promise(resolve => setTimeout(resolve, 100));
+    // Use postMessage to get HTML from iframe (works cross-origin)
+    // Ask iframe to prepare and send back its HTML
+    const htmlContent = await new Promise((resolve, reject) => {
+      const timeout = setTimeout(() => reject(new Error('Timeout: iframe did not respond')), 8000);
+      
+      function onMessage(event) {
+        if (event.data && event.data.type === 'page_html') {
+          clearTimeout(timeout);
+          window.removeEventListener('message', onMessage);
+          resolve(event.data.html);
+        }
+      }
+      window.addEventListener('message', onMessage);
+      iframe.contentWindow.postMessage('get_html', '*');
+    });
 
-    const htmlContent = doc.documentElement.outerHTML;
-    
-    // Re-enable contenteditable after getting the HTML (if we stay in the editor)
-    if (iframe.contentWindow.restoreAfterSave) {
-      iframe.contentWindow.restoreAfterSave();
-    }
-
-    // Send payload
+    // Send payload to backend
     const res = await fetch('/api/pages/write', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        file: pageFile,
-        html: '<!DOCTYPE html>\n' + htmlContent
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ file: pageFile, html: '<!DOCTYPE html>\n' + htmlContent })
     });
 
     if (res.ok) {
       isDirty = false;
-      // Clear pages cache so admin panel reloads fresh data
-      pagesCache = null;
-      showToast('Page saved successfully!', 'success');
+      showToast('Page saved successfully! ✅', 'success');
+      // Re-enable editing in iframe
+      iframe.contentWindow.postMessage('restore_after_save', '*');
     } else {
       let errMsg = `Save failed (HTTP ${res.status})`;
       try { const d = await res.json(); errMsg = d.error || errMsg; } catch(e) {}
@@ -113,7 +106,7 @@ async function savePage() {
     }
   } catch (err) {
     console.error('Failed to save:', err);
-    showToast('Network error: ' + (err.message || 'Check console for details'), 'error');
+    showToast('Error: ' + (err.message || 'Unknown error'), 'error');
   } finally {
     saveOverlay.classList.remove('active');
   }
