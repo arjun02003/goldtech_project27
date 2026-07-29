@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cookieParser = require('cookie-parser');
 const multer = require('multer');
@@ -5,6 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
 const cors = require('cors');
+const https = require('https');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -19,9 +21,67 @@ app.use(cors({
 app.options('*', cors()); // Handle preflight for all routes
 
 // Configuration
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'admin123';
+const ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123';
 const FRONTEND_DIR = path.join(__dirname, '..', 'frontend');
+
+// GitHub config for auto-commit
+const GH_TOKEN = process.env.GITHUB_TOKEN || '';
+const GH_OWNER = process.env.GITHUB_OWNER || 'arjun02003';
+const GH_REPO = process.env.GITHUB_REPO || 'goldtech_project27';
+const GH_BRANCH = process.env.GITHUB_BRANCH || 'main';
+
+// Commit a file to GitHub so changes are permanent and trigger Vercel/Render redeploy
+async function commitToGitHub(filePath, content, message) {
+  if (!GH_TOKEN) return { skipped: true };
+
+  // filePath relative to repo root (e.g. 'frontend/index.html')
+  const apiPath = `/repos/${GH_OWNER}/${GH_REPO}/contents/${filePath}`;
+  const encoded = Buffer.from(content, 'utf8').toString('base64');
+
+  // Get current SHA of the file
+  const getSha = () => new Promise((resolve) => {
+    const options = {
+      hostname: 'api.github.com',
+      path: apiPath + `?ref=${GH_BRANCH}`,
+      method: 'GET',
+      headers: { 'Authorization': `token ${GH_TOKEN}`, 'User-Agent': 'GoldtechCMS', 'Accept': 'application/vnd.github.v3+json' }
+    };
+    let data = '';
+    const req = https.request(options, res => {
+      res.on('data', d => data += d);
+      res.on('end', () => { try { resolve(JSON.parse(data).sha || null); } catch(e) { resolve(null); } });
+    });
+    req.on('error', () => resolve(null));
+    req.end();
+  });
+
+  const sha = await getSha();
+  const body = JSON.stringify({ message, content: encoded, branch: GH_BRANCH, ...(sha ? { sha } : {}) });
+
+  return new Promise((resolve) => {
+    const options = {
+      hostname: 'api.github.com',
+      path: apiPath,
+      method: 'PUT',
+      headers: {
+        'Authorization': `token ${GH_TOKEN}`,
+        'User-Agent': 'GoldtechCMS',
+        'Accept': 'application/vnd.github.v3+json',
+        'Content-Type': 'application/json',
+        'Content-Length': Buffer.byteLength(body)
+      }
+    };
+    let data = '';
+    const req = https.request(options, res => {
+      res.on('data', d => data += d);
+      res.on('end', () => { try { resolve(JSON.parse(data)); } catch(e) { resolve({ error: e.message }); } });
+    });
+    req.on('error', (e) => resolve({ error: e.message }));
+    req.write(body);
+    req.end();
+  });
+}
 const AUTH_TOKEN = 'goldtech_auth_token_secure_2026';
 
 // Initialize directories
@@ -242,14 +302,14 @@ app.get('/api/pages/read', checkAuth, (req, res) => {
 });
 
 // Save updated page HTML
-app.post('/api/pages/write', checkAuth, (req, res) => {
+app.post('/api/pages/write', checkAuth, async (req, res) => {
   const { file: pageFile, html } = req.body;
   if (!pageFile || !html) {
     return res.status(400).json({ error: 'File and HTML parameters are required.' });
   }
 
   const filePath = path.join(FRONTEND_DIR, pageFile);
-  
+
   // Prevent directory traversal
   if (!filePath.startsWith(FRONTEND_DIR)) {
     return res.status(403).json({ error: 'Access denied.' });
@@ -258,19 +318,23 @@ app.post('/api/pages/write', checkAuth, (req, res) => {
   try {
     // Clean up editor-injected classes, elements, and contenteditable attributes
     const $ = cheerio.load(html);
-    
-    // Remove editor CSS and JS tags if present
     $('link[href="/admin/css/editor-inject.css"]').remove();
     $('script[src="/admin/js/editor-inject.js"]').remove();
-    
-    // Remove inline attributes and classes added by editing
     $('[contenteditable]').removeAttr('contenteditable');
     $('.editable-hover-highlight').removeClass('editable-hover-highlight');
     $('.editing-selected').removeClass('editing-selected');
 
     const cleanHtml = $.html();
-    
     fs.writeFileSync(filePath, cleanHtml, 'utf8');
+
+    // Commit change to GitHub (ignore failures)
+    const repoPath = path.relative(path.join(__dirname, '..'), filePath).replace(/\\/g, '/');
+    try {
+      await commitToGitHub(repoPath, cleanHtml, `CMS edit: ${repoPath}`);
+    } catch (gitErr) {
+      console.error('GitHub commit failed:', gitErr);
+    }
+
     res.json({ success: true, message: 'Page saved successfully.' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to write page: ' + err.message });
