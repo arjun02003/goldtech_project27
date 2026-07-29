@@ -133,9 +133,36 @@ app.get('/api/auth-status', (req, res) => {
   res.json({ authenticated: cookieToken === AUTH_TOKEN || headerToken === AUTH_TOKEN });
 });
 
+// Pages cache for fast loading
+let pagesCache = null;
+let pagesCacheTime = 0;
+const CACHE_TTL = 60000; // 1 minute cache
+
+// Fast title extraction using regex instead of cheerio
+function extractTitle(filePath) {
+  try {
+    // Read only first 2KB to find <title> tag (much faster than full file parse)
+    const fd = fs.openSync(filePath, 'r');
+    const buf = Buffer.alloc(2048);
+    fs.readSync(fd, buf, 0, 2048, 0);
+    fs.closeSync(fd);
+    const chunk = buf.toString('utf8');
+    const match = chunk.match(/<title[^>]*>([^<]+)<\/title>/i);
+    if (match && match[1]) {
+      return match[1].split(' - ')[0].split(' | ')[0].trim();
+    }
+  } catch (e) {}
+  return null;
+}
+
 // Pages CRUD APIs
 app.get('/api/pages', checkAuth, (req, res) => {
   try {
+    // Return cached result if fresh
+    if (pagesCache && (Date.now() - pagesCacheTime < CACHE_TTL)) {
+      return res.json({ pages: pagesCache });
+    }
+
     const rootDir = FRONTEND_DIR;
     const dirs = fs.readdirSync(rootDir, { withFileTypes: true });
     const pages = [];
@@ -154,23 +181,14 @@ app.get('/api/pages', checkAuth, (req, res) => {
       if (dirent.isDirectory()) {
         const name = dirent.name;
         // Skip system directories
-        if (['.git', 'node_modules', 'admin', 'uploads', 'scratch', 'backend'].includes(name)) {
+        if (['.git', 'node_modules', 'admin', 'uploads', 'scratch', 'backend', 'wp-content'].includes(name)) {
           return;
         }
 
         const indexPath = path.join(rootDir, name, 'index.html');
         if (fs.existsSync(indexPath)) {
-          let title = name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-          try {
-            const html = fs.readFileSync(indexPath, 'utf8');
-            const $ = cheerio.load(html);
-            const htmlTitle = $('title').text();
-            if (htmlTitle) {
-              title = htmlTitle.split(' - ')[0].split(' | ')[0].trim();
-            }
-          } catch (e) {
-            // Fallback to slug-based title
-          }
+          // Fast regex title extraction instead of cheerio
+          let title = extractTitle(indexPath) || name.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
           pages.push({
             title: title,
@@ -181,6 +199,10 @@ app.get('/api/pages', checkAuth, (req, res) => {
         }
       }
     });
+
+    // Cache the result
+    pagesCache = pages;
+    pagesCacheTime = Date.now();
 
     res.json({ pages });
   } catch (err) {
