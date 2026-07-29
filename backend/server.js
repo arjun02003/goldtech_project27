@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 3000;
 
 // Enable CORS for Vercel frontend
 app.use(cors({
-  origin: ['https://goldtech-project27.vercel.app', 'http://localhost:3000'],
+  origin: ['https://goldtech-project27.vercel.app', 'https://goldtech-project27-1.onrender.com', 'http://localhost:3000'],
   credentials: true
 }));
 
