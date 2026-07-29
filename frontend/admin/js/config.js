@@ -1,4 +1,4 @@
-window.API_BASE_URL = 'https://goldtech-backend.onrender.com'; // Change this to your actual backend deployed URL (e.g. Render, Heroku)
+window.API_BASE_URL = 'https://goldtech-project27.onrender.com'; // Render backend URL
 // For local development, use 'http://localhost:3000'
 
 const originalFetch = window.fetch;

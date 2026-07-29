@@ -113,7 +113,7 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-    res.cookie('admin_token', AUTH_TOKEN, { path: '/', httpOnly: true, sameSite: 'strict' });
+    res.cookie('admin_token', AUTH_TOKEN, { path: '/', httpOnly: true, sameSite: 'none', secure: true });
     res.json({ success: true, message: 'Logged in successfully.' });
   } else {
     res.status(401).json({ error: 'Invalid username or password.' });
@@ -121,7 +121,7 @@ app.post('/api/login', (req, res) => {
 });
 
 app.post('/api/logout', (req, res) => {
-  res.clearCookie('admin_token', { path: '/' });
+  res.clearCookie('admin_token', { path: '/', sameSite: 'none', secure: true });
   res.json({ success: true, message: 'Logged out successfully.' });
 });
 
