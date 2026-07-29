@@ -404,13 +404,31 @@ figcaption,
 
 <style id="goldtech-custom-fixes">
 /* Reset header overrides introduced by clashing Colorjet styles */
-header {
-  background: transparent !important;
-  background-image: none !important;
-  position: relative !important;
-  height: auto !important;
-  z-index: 99 !important;
+.ekit-template-content-header {
+  position: absolute !important;
   width: 100% !important;
+  left: 0 !important;
+  top: 0 !important;
+  z-index: 9999 !important;
+  background: transparent !important;
+}
+.ekit-template-content-header .elementor-7220 {
+  background: transparent !important;
+}
+.ekit-template-content-header .elementor-element-f914159 {
+  background: transparent !important;
+}
+/* Ensure menu items inside transparent header are easily visible */
+.ekit-template-content-header .elementor-nav-menu .menu-item a {
+  color: #ffffff !important;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.8) !important;
+}
+.ekit-template-content-header .elementor-nav-menu .sub-menu a {
+  color: #ffffff !important;
+}
+/* Offset the banner/carousel text so it doesn't collide with transparent header */
+.main-banner {
+  position: relative !important;
 }
 
 /* Prevent dropdown menu text cut-off */
