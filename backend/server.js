@@ -46,10 +46,11 @@ app.use(express.json({ limit: '50mb' }));
 app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 app.use(cookieParser());
 
-// Auth helper middleware
+// Auth helper middleware (supports both cookie and Authorization header)
 function checkAuth(req, res, next) {
-  const token = req.cookies.admin_token;
-  if (token === AUTH_TOKEN) {
+  const cookieToken = req.cookies.admin_token;
+  const headerToken = (req.headers.authorization || '').replace('Bearer ', '');
+  if (cookieToken === AUTH_TOKEN || headerToken === AUTH_TOKEN) {
     next();
   } else {
     res.status(401).json({ error: 'Unauthorized. Please login.' });
@@ -115,7 +116,7 @@ app.post('/api/login', (req, res) => {
   const { username, password } = req.body;
   if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
     res.cookie('admin_token', AUTH_TOKEN, { path: '/', httpOnly: true, sameSite: 'none', secure: true });
-    res.json({ success: true, message: 'Logged in successfully.' });
+    res.json({ success: true, message: 'Logged in successfully.', token: AUTH_TOKEN });
   } else {
     res.status(401).json({ error: 'Invalid username or password.' });
   }
@@ -127,8 +128,9 @@ app.post('/api/logout', (req, res) => {
 });
 
 app.get('/api/auth-status', (req, res) => {
-  const token = req.cookies.admin_token;
-  res.json({ authenticated: token === AUTH_TOKEN });
+  const cookieToken = req.cookies.admin_token;
+  const headerToken = (req.headers.authorization || '').replace('Bearer ', '');
+  res.json({ authenticated: cookieToken === AUTH_TOKEN || headerToken === AUTH_TOKEN });
 });
 
 // Pages CRUD APIs

@@ -14,11 +14,25 @@ window.fetch = function() {
     resource = window.API_BASE_URL + resource;
   }
   
-  // Always include credentials (cookies) for cross-origin authentication
+  // Always include credentials (cookies) for same-origin
   if (!config) {
     config = {};
   }
   config.credentials = 'include';
+  
+  // Attach Authorization header from localStorage token (for cross-origin)
+  const token = localStorage.getItem('admin_token');
+  if (token) {
+    if (!config.headers) {
+      config.headers = {};
+    }
+    // Preserve existing headers if they are a Headers object
+    if (config.headers instanceof Headers) {
+      config.headers.set('Authorization', 'Bearer ' + token);
+    } else {
+      config.headers['Authorization'] = 'Bearer ' + token;
+    }
+  }
   
   return originalFetch(resource, config);
 };

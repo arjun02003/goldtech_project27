@@ -344,6 +344,7 @@ logoutBtn.addEventListener('click', async () => {
   try {
     const res = await fetch('/api/logout', { method: 'POST' });
     if (res.ok) {
+      localStorage.removeItem('admin_token');
       window.location.href = '/admin/login.html';
     }
   } catch (err) {
