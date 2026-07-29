@@ -19,12 +19,18 @@ const toastEl = document.getElementById('toast');
 async function checkAuthentication() {
   try {
     const res = await fetch('/api/auth-status');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     if (!data.authenticated) {
       window.location.href = '/admin/login.html?redirect=' + encodeURIComponent(window.location.pathname);
     }
   } catch (err) {
     console.error('Failed to verify auth status:', err);
+    pagesGrid.innerHTML = `<div class="error-state">
+      <h3>Backend Connection Failed ❌</h3>
+      <p>Cannot connect to the backend server. If you deployed to Vercel, you also need to deploy the <b>backend</b> folder to Render or cPanel, and update the URL in <code>frontend/admin/js/config.js</code>.</p>
+      <p>Error: ${err.message}</p>
+    </div>`;
   }
 }
 
@@ -54,15 +60,21 @@ document.getElementById('navCreateBtn').addEventListener('click', (e) => {
   openCreateModal();
 });
 
-// Load Pages list from API
+// Load pages
 async function loadPages() {
+  pagesGrid.innerHTML = '<div class="loading">Loading pages directory...</div>';
   try {
     const res = await fetch('/api/pages');
+    if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
     const data = await res.json();
     pages = data.pages || [];
     renderPages();
   } catch (err) {
-    showToast('Failed to load page directory.', 'error');
+    console.error('Error loading pages:', err);
+    pagesGrid.innerHTML = `<div class="error-state">
+      <h3>Backend Connection Failed ❌</h3>
+      <p>Cannot connect to the backend server. If you deployed to Vercel, you also need to deploy the <b>backend</b> folder to Render or cPanel, and update the URL in <code>frontend/admin/js/config.js</code>.</p>
+    </div>`;
   }
 }
 
