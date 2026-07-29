@@ -2452,125 +2452,133 @@ solutions</h3>				</div>
 					</div>
 				</div>
 				</div>
-		<!-- AWARDS & ACHIEVEMENTS SECTION - Premium Redesign -->
-		<div id="awards-section" style="background: #f8f9fb; padding: 80px 0;">
-		<div style="max-width: 1200px; margin: 0 auto; padding: 0 32px;">
-		<div style="display: flex; gap: 60px; align-items: flex-start;">
-
-			<!-- LEFT PANEL -->
-			<div style="flex: 0 0 300px;">
-				<p style="display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 600; color: #c0a232; letter-spacing: 1.5px; text-transform: uppercase; margin: 0 0 14px;">
-					<span style="display:inline-block; width:32px; height:2px; background:#c0a232;"></span>
-					Awards &amp; Recognition
-				</p>
-				<h2 style="font-size: 2.2rem; font-weight: 800; color: #0d1b2a; line-height: 1.25; margin: 0 0 20px;">Our Company Awards &amp; Achievements</h2>
-				<p style="font-size: 15px; color: #6b7280; line-height: 1.75; margin: 0 0 32px;">Over the years, Goldtech Graphics Pvt. Ltd. has been recognized with prestigious awards for excellence in printing solutions, innovation, and customer satisfaction.</p>
-				<div style="display: flex; gap: 12px;">
-					<button onclick="awardsSlide(-1)" style="width:48px;height:48px;border-radius:50%;border:2px solid #0d1b2a;background:transparent;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#0d1b2a;transition:all 0.3s;" onmouseover="this.style.background='#0d1b2a';this.style.color='#fff'" onmouseout="this.style.background='transparent';this.style.color='#0d1b2a'">&#8592;</button>
-					<button onclick="awardsSlide(1)" style="width:48px;height:48px;border-radius:50%;border:2px solid #0d1b2a;background:#0d1b2a;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;transition:all 0.3s;" onmouseover="this.style.background='#c0a232';this.style.borderColor='#c0a232'" onmouseout="this.style.background='#0d1b2a';this.style.borderColor='#0d1b2a'">&#8594;</button>
+		<style>
+		#awards-section { background:#f4f6f9; padding:90px 0; }
+		.awards-wrapper { max-width:1260px; margin:0 auto; padding:0 40px; }
+		.awards-layout { display:flex; gap:64px; align-items:flex-start; }
+		.awards-left { flex:0 0 280px; }
+		.awards-label { display:flex; align-items:center; gap:10px; font-size:12px; font-weight:700; color:#c0a232; letter-spacing:2px; text-transform:uppercase; margin:0 0 16px; }
+		.awards-label span { display:inline-block; width:30px; height:2px; background:#c0a232; }
+		.awards-heading { font-size:2rem; font-weight:800; color:#0d1b2a; line-height:1.2; margin:0 0 18px; }
+		.awards-desc { font-size:14.5px; color:#6b7280; line-height:1.8; margin:0 0 36px; }
+		.awards-nav { display:flex; gap:12px; }
+		.awards-nav-btn { width:48px; height:48px; border-radius:50%; border:2px solid #0d1b2a; background:transparent; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:18px; color:#0d1b2a; transition:all 0.25s; }
+		.awards-nav-btn:hover { background:#0d1b2a; color:#fff; }
+		.awards-nav-btn.next { background:#0d1b2a; color:#fff; }
+		.awards-nav-btn.next:hover { background:#c0a232; border-color:#c0a232; }
+		.awards-slider-wrap { flex:1; min-width:0; overflow:hidden; }
+		.awards-track { display:flex; gap:28px; transition:transform 0.5s cubic-bezier(0.4,0,0.2,1); align-items:stretch; }
+		.award-card-v2 { flex:0 0 calc(50% - 14px); background:#fff; border-radius:18px; overflow:hidden; box-shadow:0 2px 20px rgba(0,0,0,0.07); display:flex; flex-direction:row; min-height:200px; cursor:pointer; transition:transform 0.3s, box-shadow 0.3s; }
+		.award-card-v2:hover { transform:translateY(-5px); box-shadow:0 10px 36px rgba(0,0,0,0.14); }
+		.award-img-panel { flex:0 0 38%; position:relative; overflow:hidden; }
+		.award-img-panel img { width:100%; height:100%; object-fit:cover; display:block; }
+		.award-year-badge { position:absolute; top:12px; left:12px; background:#c0a232; color:#fff; font-size:11px; font-weight:800; letter-spacing:1px; padding:4px 10px; border-radius:20px; }
+		.award-content-panel { flex:1; padding:22px; display:flex; flex-direction:column; justify-content:center; }
+		.award-content-panel h3 { font-size:0.95rem; font-weight:700; color:#0d1b2a; margin:0 0 10px; line-height:1.4; }
+		.award-content-panel p { font-size:12.5px; color:#6b7280; line-height:1.65; margin:0 0 14px; }
+		.award-view-link { display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:700; color:#c0a232; text-decoration:none; }
+		@media(max-width:1024px) { .awards-layout{flex-direction:column;gap:40px} .awards-left{flex:none;width:100%;max-width:560px} }
+		@media(max-width:768px) { .awards-wrapper{padding:0 20px} #awards-section{padding:60px 0} .awards-heading{font-size:1.6rem} .award-card-v2{flex:0 0 100%;flex-direction:column;min-height:auto} .award-img-panel{flex:none;height:180px;width:100%} }
+		@media(max-width:480px) { .awards-heading{font-size:1.4rem} .award-img-panel{height:160px} }
+		</style>
+		<div id="awards-section">
+		<div class="awards-wrapper">
+		<div class="awards-layout">
+			<div class="awards-left">
+				<p class="awards-label"><span></span>Awards &amp; Recognition</p>
+				<h2 class="awards-heading">Our Company Awards &amp; Achievements</h2>
+				<p class="awards-desc">Over the years, Goldtech Graphics Pvt. Ltd. has been recognized with prestigious awards for excellence in printing solutions, innovation, and customer satisfaction.</p>
+				<div class="awards-nav">
+					<button class="awards-nav-btn prev" onclick="awardsSlide(-1)" aria-label="Previous">&#8592;</button>
+					<button class="awards-nav-btn next" onclick="awardsSlide(1)" aria-label="Next">&#8594;</button>
 				</div>
 			</div>
-
-			<!-- RIGHT CARDS SLIDER -->
-			<div style="flex:1; overflow:hidden; position:relative;">
-				<div id="awards-track" style="display:flex; gap:24px; transition: transform 0.5s cubic-bezier(0.4,0,0.2,1); will-change: transform;">
-
-					<!-- Card 1 -->
-					<div class="award-card" style="flex:0 0 calc(50% - 12px); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); cursor:pointer; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-						<div style="position:relative; height:220px; background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/ee3-150x150.png" alt="Award 1" style="width:130px; height:130px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(192,162,50,0.5));">
-							<div style="position:absolute;top:16px;right:16px;background:#c0a232;color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;">2024</div>
+			<div class="awards-slider-wrap">
+				<div class="awards-track" id="awards-track">
+					<div class="award-card-v2">
+						<div class="award-img-panel" style="background:linear-gradient(145deg,#0d1b2a,#1a3a5c)">
+							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/ee3-150x150.png" alt="Best Printing Solutions Provider Award">
+							<span class="award-year-badge">2024</span>
 						</div>
-						<div style="padding:22px;">
-							<h3 style="font-size:1rem;font-weight:700;color:#0d1b2a;margin:0 0 10px;line-height:1.4;">Best Printing Solutions Provider</h3>
-							<p style="font-size:13px;color:#6b7280;margin:0 0 14px;line-height:1.6;">Awarded for excellence in eco-solvent and UV printing technology at PrintIndia Expo 2024.</p>
-							<span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#c0a232;">View Details &nbsp;&#8594;</span>
+						<div class="award-content-panel">
+							<h3>Best Printing Solutions Provider</h3>
+							<p>Awarded for excellence in eco-solvent and UV printing technology at PrintIndia Expo 2024.</p>
+							<a href="#" class="award-view-link">View Details &#8594;</a>
 						</div>
 					</div>
-
-					<!-- Card 2 -->
-					<div class="award-card" style="flex:0 0 calc(50% - 12px); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); cursor:pointer; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-						<div style="position:relative; height:220px; background: linear-gradient(135deg, #1a3a5c 0%, #0d1b2a 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e6-150x150.png" alt="Award 2" style="width:130px; height:130px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(192,162,50,0.5));">
-							<div style="position:absolute;top:16px;right:16px;background:#c0a232;color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;">2023</div>
+					<div class="award-card-v2">
+						<div class="award-img-panel" style="background:linear-gradient(145deg,#1a3a5c,#0d1b2a)">
+							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e6-150x150.png" alt="Top Manufacturer Award">
+							<span class="award-year-badge">2023</span>
 						</div>
-						<div style="padding:22px;">
-							<h3 style="font-size:1rem;font-weight:700;color:#0d1b2a;margin:0 0 10px;line-height:1.4;">Top Manufacturer Award – North India</h3>
-							<p style="font-size:13px;color:#6b7280;margin:0 0 14px;line-height:1.6;">Recognized as the leading manufacturer of wide-format printers across North India region.</p>
-							<span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#c0a232;">View Details &nbsp;&#8594;</span>
+						<div class="award-content-panel">
+							<h3>Top Manufacturer Award – North India</h3>
+							<p>Recognized as the leading manufacturer of wide-format printers across North India region.</p>
+							<a href="#" class="award-view-link">View Details &#8594;</a>
 						</div>
 					</div>
-
-					<!-- Card 3 -->
-					<div class="award-card" style="flex:0 0 calc(50% - 12px); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); cursor:pointer; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-						<div style="position:relative; height:220px; background: linear-gradient(135deg, #0d1b2a 0%, #c0a232 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e8-150x150.png" alt="Award 3" style="width:130px; height:130px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(255,255,255,0.3));">
-							<div style="position:absolute;top:16px;right:16px;background:#0d1b2a;color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;">2023</div>
+					<div class="award-card-v2">
+						<div class="award-img-panel" style="background:linear-gradient(145deg,#0d1b2a,#b8922a)">
+							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e8-150x150.png" alt="Innovation Excellence Award">
+							<span class="award-year-badge" style="background:#0d1b2a">2023</span>
 						</div>
-						<div style="padding:22px;">
-							<h3 style="font-size:1rem;font-weight:700;color:#0d1b2a;margin:0 0 10px;line-height:1.4;">Innovation Excellence Award</h3>
-							<p style="font-size:13px;color:#6b7280;margin:0 0 14px;line-height:1.6;">Honored for innovation in UV flatbed printing technology at National Print Summit 2023.</p>
-							<span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#c0a232;">View Details &nbsp;&#8594;</span>
+						<div class="award-content-panel">
+							<h3>Innovation Excellence Award</h3>
+							<p>Honored for innovation in UV flatbed printing technology at National Print Summit 2023.</p>
+							<a href="#" class="award-view-link">View Details &#8594;</a>
 						</div>
 					</div>
-
-					<!-- Card 4 -->
-					<div class="award-card" style="flex:0 0 calc(50% - 12px); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); cursor:pointer; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-						<div style="position:relative; height:220px; background: linear-gradient(135deg, #c0a232 0%, #1a3a5c 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e2-150x150.png" alt="Award 4" style="width:130px; height:130px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
-							<div style="position:absolute;top:16px;right:16px;background:#0d1b2a;color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;">2022</div>
+					<div class="award-card-v2">
+						<div class="award-img-panel" style="background:linear-gradient(145deg,#b8922a,#1a3a5c)">
+							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e2-150x150.png" alt="Customer Satisfaction Gold Award">
+							<span class="award-year-badge" style="background:#0d1b2a">2022</span>
 						</div>
-						<div style="padding:22px;">
-							<h3 style="font-size:1rem;font-weight:700;color:#0d1b2a;margin:0 0 10px;line-height:1.4;">Customer Satisfaction Gold Award</h3>
-							<p style="font-size:13px;color:#6b7280;margin:0 0 14px;line-height:1.6;">Awarded for outstanding after-sales service and customer support across 10+ branches.</p>
-							<span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#c0a232;">View Details &nbsp;&#8594;</span>
+						<div class="award-content-panel">
+							<h3>Customer Satisfaction Gold Award</h3>
+							<p>Awarded for outstanding after-sales service and customer support across 10+ branches.</p>
+							<a href="#" class="award-view-link">View Details &#8594;</a>
 						</div>
 					</div>
-
-					<!-- Card 5 -->
-					<div class="award-card" style="flex:0 0 calc(50% - 12px); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); cursor:pointer; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-						<div style="position:relative; height:220px; background: linear-gradient(135deg, #0d1b2a 0%, #2c4a6e 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e4-150x150.png" alt="Award 5" style="width:130px; height:130px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(192,162,50,0.5));">
-							<div style="position:absolute;top:16px;right:16px;background:#c0a232;color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;">2022</div>
+					<div class="award-card-v2">
+						<div class="award-img-panel" style="background:linear-gradient(145deg,#0d1b2a,#2c4a6e)">
+							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e4-150x150.png" alt="Best Export Quality Certificate">
+							<span class="award-year-badge">2022</span>
 						</div>
-						<div style="padding:22px;">
-							<h3 style="font-size:1rem;font-weight:700;color:#0d1b2a;margin:0 0 10px;line-height:1.4;">Best Export Quality Certificate</h3>
-							<p style="font-size:13px;color:#6b7280;margin:0 0 14px;line-height:1.6;">Received export quality certification for solvent inks and printer consumables.</p>
-							<span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#c0a232;">View Details &nbsp;&#8594;</span>
+						<div class="award-content-panel">
+							<h3>Best Export Quality Certificate</h3>
+							<p>Received export quality certification for solvent inks and printer consumables.</p>
+							<a href="#" class="award-view-link">View Details &#8594;</a>
 						</div>
 					</div>
-
-					<!-- Card 6 -->
-					<div class="award-card" style="flex:0 0 calc(50% - 12px); background:#fff; border-radius:16px; overflow:hidden; box-shadow:0 4px 24px rgba(0,0,0,0.08); cursor:pointer; transition: transform 0.3s, box-shadow 0.3s;" onmouseover="this.style.transform='translateY(-6px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,0.15)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 24px rgba(0,0,0,0.08)'">
-						<div style="position:relative; height:220px; background: linear-gradient(135deg, #2c4a6e 0%, #c0a232 100%); display:flex; align-items:center; justify-content:center; overflow:hidden;">
-							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e7-150x150.png" alt="Award 6" style="width:130px; height:130px; object-fit:contain; filter:drop-shadow(0 8px 24px rgba(0,0,0,0.3));">
-							<div style="position:absolute;top:16px;right:16px;background:#0d1b2a;color:#fff;padding:5px 12px;border-radius:20px;font-size:11px;font-weight:700;letter-spacing:1px;">2021</div>
+					<div class="award-card-v2">
+						<div class="award-img-panel" style="background:linear-gradient(145deg,#2c4a6e,#b8922a)">
+							<img src="https://goldtechgraphicsinfo.com/wp-content/uploads/2024/09/e7-150x150.png" alt="Emerging Brand of the Year">
+							<span class="award-year-badge" style="background:#0d1b2a">2021</span>
 						</div>
-						<div style="padding:22px;">
-							<h3 style="font-size:1rem;font-weight:700;color:#0d1b2a;margin:0 0 10px;line-height:1.4;">Emerging Brand of the Year</h3>
-							<p style="font-size:13px;color:#6b7280;margin:0 0 14px;line-height:1.6;">Named Emerging Brand of the Year at the India Print Awards ceremony 2021.</p>
-							<span style="display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:#c0a232;">View Details &nbsp;&#8594;</span>
+						<div class="award-content-panel">
+							<h3>Emerging Brand of the Year</h3>
+							<p>Named Emerging Brand of the Year at the India Print Awards ceremony 2021.</p>
+							<a href="#" class="award-view-link">View Details &#8594;</a>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
 		</div>
 		</div>
-
 		<script>
 		(function(){
-			var currentIndex = 0;
-			function awardsSlide(dir) {
-				var track = document.getElementById('awards-track');
-				var cards = track ? track.querySelectorAll('.award-card') : [];
-				var maxIndex = Math.max(0, cards.length - 2);
-				currentIndex = Math.max(0, Math.min(maxIndex, currentIndex + dir));
-				var cardW = cards.length > 0 ? (cards[0].offsetWidth + 24) : 0;
-				track.style.transform = 'translateX(-' + (currentIndex * cardW) + 'px)';
+			var ci=0;
+			function gv(){return window.innerWidth<=768?1:2}
+			function awardsSlide(d){
+				var t=document.getElementById('awards-track');if(!t)return;
+				var c=t.querySelectorAll('.award-card-v2'),v=gv(),m=Math.max(0,c.length-v);
+				ci=Math.max(0,Math.min(m,ci+d));
+				var w=c.length>0?(c[0].getBoundingClientRect().width+28):0;
+				t.style.transform='translateX(-'+(ci*w)+'px)';
 			}
-			window.awardsSlide = awardsSlide;
+			window.awardsSlide=awardsSlide;
+			window.addEventListener('resize',function(){ci=0;awardsSlide(0)});
 		})();
 		</script>
 		<div class="elementor-element elementor-element-d6825fb e-flex e-con-boxed e-con e-parent" data-id="d6825fb" data-element_type="container" data-e-type="container">
